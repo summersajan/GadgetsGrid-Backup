@@ -1,1 +1,778 @@
-<p>Hello</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gadget Grid - Discover Cutting-Edge Tech</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- Custom CSS -->
+    <style>
+      :root {
+        --primary-color: #6c5ce7;
+        --secondary-color: #00cec9;
+        --accent-color: #fd79a8;
+        --dark-color: #2d3436;
+        --light-color: #f5f6fa;
+        --gradient: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: var(--dark-color);
+      }
+
+      .navbar {
+        background: var(--gradient);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+      }
+
+      .navbar-brand {
+        font-weight: 800;
+        font-size: 28px;
+        color: white !important;
+        letter-spacing: 1px;
+      }
+
+      .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500;
+        margin: 0 8px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: white !important;
+        transform: translateY(-2px);
+      }
+
+      .hero-section {
+        background: var(--gradient);
+        color: white;
+        padding: 80px 0;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3")
+          no-repeat center center;
+        background-size: cover;
+        opacity: 0.15;
+        z-index: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-title {
+        font-weight: 800;
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      .search-bar {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .search-input {
+        border-radius: 50px !important;
+        padding: 15px 25px;
+        border: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-btn {
+        border-radius: 50px !important;
+        padding: 10px 25px;
+        background-color: var(--accent-color);
+        border: none;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .search-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(253, 121, 168, 0.4);
+      }
+
+      .section-title {
+        font-weight: 700;
+        margin-bottom: 30px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50px;
+        height: 4px;
+        background: var(--gradient);
+        border-radius: 2px;
+      }
+
+      .product-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        margin-bottom: 25px;
+        background-color: white;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-img {
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .product-card:hover .product-img {
+        transform: scale(1.05);
+      }
+
+      .product-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 5px 12px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .product-title {
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--dark-color);
+      }
+
+      .product-price {
+        color: var(--primary-color);
+        font-weight: 800;
+        font-size: 1.2rem;
+      }
+
+      .product-meta {
+        color: #7f8c8d;
+        font-size: 14px;
+      }
+
+      .btn-primary {
+        background: var(--gradient);
+        border: none;
+        border-radius: 50px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(108, 92, 231, 0.4);
+      }
+
+      .category-chip {
+        display: inline-block;
+        background-color: #dfe6e9;
+        color: var(--dark-color);
+        padding: 5px 15px;
+        border-radius: 50px;
+        margin-right: 8px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .category-chip:hover {
+        background: var(--gradient);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .trending-badge {
+        background-color: #ffeaa7;
+        color: #e17055;
+        padding: 3px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 10px;
+      }
+
+      .footer {
+        background-color: var(--dark-color);
+        color: white;
+        padding: 60px 0 30px;
+        margin-top: 60px;
+      }
+
+      .footer-title {
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .footer-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--gradient);
+      }
+
+      .footer-link {
+        color: #b2bec3;
+        display: block;
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .footer-link:hover {
+        color: white;
+        transform: translateX(5px);
+        text-decoration: none;
+      }
+
+      .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        margin-right: 10px;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background: var(--gradient);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        margin-top: 40px;
+        color: #b2bec3;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+      }
+
+      /* Animation classes */
+      .animate-pop {
+        animation: popIn 0.6s ease forwards;
+      }
+
+      @keyframes popIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Gadget Grid</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Deals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+          </ul>
+          <div class="ms-3 d-flex">
+            <a href="#" class="btn btn-outline-light btn-sm me-2">Login</a>
+            <a href="#" class="btn btn-light btn-sm">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-content text-center">
+        <h1 class="hero-title animate__animated animate__fadeInDown">
+          Discover Tomorrow's Tech Today
+        </h1>
+        <p
+          class="hero-subtitle animate__animated animate__fadeIn animate__delay-1s"
+        >
+          Explore the latest gadgets, tech innovations, and must-have gear for
+          your lifestyle
+        </p>
+        <div
+          class="search-bar animate__animated animate__fadeIn animate__delay-2s"
+        >
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control search-input"
+              placeholder="Search for gadgets, tech, or brands..."
+            />
+            <button class="btn search-btn" type="button">
+              <i class="fas fa-search me-2"></i> Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title">Featured Products</h2>
+        <a href="#" class="btn btn-outline-primary">View All</a>
+      </div>
+      <div class="row">
+        <!-- Product 1 -->
+        <div class="col-md-4 animate-pop">
+          <div class="product-card h-100">
+            <div class="position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?ixlib=rb-4.0.3"
+                class="card-img-top product-img"
+                alt="Smartphone"
+              />
+              <span class="product-badge">New</span>
+            </div>
+            <div class="card-body">
+              <h5 class="product-title">Quantum X Pro Smartphone</h5>
+              <p class="card-text">
+                Revolutionary camera system with AI-powered photography.
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$899</span>
+                <span class="product-meta"
+                  ><i class="far fa-eye me-1"></i> 2.4k</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="col-md-4 animate-pop delay-1">
+          <div class="product-card h-100">
+            <div class="position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3"
+                class="card-img-top product-img"
+                alt="Laptop"
+              />
+              <span class="product-badge">Trending</span>
+            </div>
+            <div class="card-body">
+              <h5 class="product-title">
+                Nebula Ultrabook Pro <span class="trending-badge">HOT</span>
+              </h5>
+              <p class="card-text">
+                Thin, light, and powerful with 18-hour battery life.
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$1,299</span>
+                <span class="product-meta"
+                  ><i class="far fa-eye me-1"></i> 3.1k</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="col-md-4 animate-pop delay-2">
+          <div class="product-card h-100">
+            <div class="position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-4.0.3"
+                class="card-img-top product-img"
+                alt="Smartwatch"
+              />
+              <span class="product-badge">Best Seller</span>
+            </div>
+            <div class="card-body">
+              <h5 class="product-title">Pulse 3 Smartwatch</h5>
+              <p class="card-text">
+                Health monitoring with ECG and blood oxygen tracking.
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$249</span>
+                <span class="product-meta"
+                  ><i class="far fa-eye me-1"></i> 5.7k</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="container mb-5">
+      <h2 class="section-title mb-4">Popular Categories</h2>
+      <div class="row">
+        <div class="col-6 col-md-3 mb-4 animate-pop">
+          <div class="category-card text-center">
+            <div
+              class="bg-light p-4 rounded-3 h-100 d-flex flex-column align-items-center justify-content-center"
+            >
+              <i
+                class="fas fa-mobile-alt fa-3x mb-3"
+                style="color: var(--primary-color)"
+              ></i>
+              <h5>Smartphones</h5>
+              <p class="text-muted small">128 Products</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 mb-4 animate-pop delay-1">
+          <div class="category-card text-center">
+            <div
+              class="bg-light p-4 rounded-3 h-100 d-flex flex-column align-items-center justify-content-center"
+            >
+              <i
+                class="fas fa-laptop fa-3x mb-3"
+                style="color: var(--secondary-color)"
+              ></i>
+              <h5>Laptops</h5>
+              <p class="text-muted small">76 Products</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 mb-4 animate-pop delay-2">
+          <div class="category-card text-center">
+            <div
+              class="bg-light p-4 rounded-3 h-100 d-flex flex-column align-items-center justify-content-center"
+            >
+              <i
+                class="fas fa-clock fa-3x mb-3"
+                style="color: var(--accent-color)"
+              ></i>
+              <h5>Smartwatches</h5>
+              <p class="text-muted small">54 Products</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 mb-4 animate-pop delay-3">
+          <div class="category-card text-center">
+            <div
+              class="bg-light p-4 rounded-3 h-100 d-flex flex-column align-items-center justify-content-center"
+            >
+              <i
+                class="fas fa-headphones fa-3x mb-3"
+                style="color: #00b894"
+              ></i>
+              <h5>Audio</h5>
+              <p class="text-muted small">92 Products</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Now -->
+    <section class="container mb-5">
+      <h2 class="section-title">Trending Now</h2>
+      <div class="row">
+        <!-- Product 4 -->
+        <div class="col-md-3 col-6 mb-4 animate-pop">
+          <div class="product-card h-100">
+            <img
+              src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3"
+              class="card-img-top product-img"
+              alt="Wireless Earbuds"
+            />
+            <div class="card-body">
+              <h5 class="product-title">AirBuds Pro</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$179</span>
+                <span class="product-meta"
+                  ><i class="far fa-heart me-1"></i> 1.2k</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="col-md-3 col-6 mb-4 animate-pop delay-1">
+          <div class="product-card h-100">
+            <img
+              src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3"
+              class="card-img-top product-img"
+              alt="Drone"
+            />
+            <div class="card-body">
+              <h5 class="product-title">SkyView Drone 4K</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$499</span>
+                <span class="product-meta"
+                  ><i class="far fa-heart me-1"></i> 892</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="col-md-3 col-6 mb-4 animate-pop delay-2">
+          <div class="product-card h-100">
+            <img
+              src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3"
+              class="card-img-top product-img"
+              alt="VR Headset"
+            />
+            <div class="card-body">
+              <h5 class="product-title">VR Vision Pro</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$349</span>
+                <span class="product-meta"
+                  ><i class="far fa-heart me-1"></i> 1.5k</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product 7 -->
+        <div class="col-md-3 col-6 mb-4 animate-pop delay-3">
+          <div class="product-card h-100">
+            <img
+              src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3"
+              class="card-img-top product-img"
+              alt="Smart Speaker"
+            />
+            <div class="card-body">
+              <h5 class="product-title">Echo Studio</h5>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="product-price">$199</span>
+                <span class="product-meta"
+                  ><i class="far fa-heart me-1"></i> 2.3k</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="container mb-5">
+      <div
+        class="bg-light rounded-4 p-5 text-center"
+        style="background: var(--gradient); color: white"
+      >
+        <h2 class="mb-3">Stay Updated with Gadget Grid</h2>
+        <p class="mb-4">
+          Subscribe to our newsletter for the latest tech news, product
+          releases, and exclusive deals.
+        </p>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="input-group">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Your email address"
+              />
+              <button class="btn btn-dark" type="button">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h3 class="footer-title">Gadget Grid</h3>
+            <p>
+              Discovering and sharing the most innovative tech products from
+              around the world.
+            </p>
+            <div class="mt-4">
+              <a href="#" class="social-icon"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-icon"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h3 class="footer-title">Quick Links</h3>
+            <a href="#" class="footer-link">Home</a>
+            <a href="#" class="footer-link">Products</a>
+            <a href="#" class="footer-link">Categories</a>
+            <a href="#" class="footer-link">Deals</a>
+            <a href="#" class="footer-link">Blog</a>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h3 class="footer-title">Help</h3>
+            <a href="#" class="footer-link">Contact Us</a>
+            <a href="#" class="footer-link">FAQ</a>
+            <a href="#" class="footer-link">Shipping</a>
+            <a href="#" class="footer-link">Returns</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h3 class="footer-title">Contact</h3>
+            <p>
+              <i class="fas fa-map-marker-alt me-2"></i> 123 Tech Street,
+              Silicon Valley
+            </p>
+            <p><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</p>
+            <p><i class="fas fa-envelope me-2"></i> hello@gadgetgrid.com</p>
+          </div>
+        </div>
+        <div class="text-center copyright">
+          <p>&copy; 2023 Gadget Grid. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+      // Animation on scroll
+      document.addEventListener("DOMContentLoaded", function () {
+        const animateElements = document.querySelectorAll(".animate-pop");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = "scale(1)";
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        animateElements.forEach((el) => {
+          el.style.opacity = 0;
+          el.style.transform = "scale(0.8)";
+          el.style.transition = "all 0.6s ease";
+          observer.observe(el);
+        });
+
+        // Add hover effect to category chips
+        const categoryChips = document.querySelectorAll(".category-chip");
+        categoryChips.forEach((chip) => {
+          chip.addEventListener("mouseenter", function () {
+            this.style.transform = "translateY(-3px)";
+          });
+          chip.addEventListener("mouseleave", function () {
+            this.style.transform = "translateY(0)";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
