@@ -754,8 +754,7 @@
                 <div class="d-flex align-items-center">
                     <!-- Logo -->
                     <a class="navbar-brand d-flex align-items-center" href="#">
-                        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;"
-                            class="rounded-circle me-2" />
+                        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
                     </a>
                     <!-- Search -->
@@ -832,8 +831,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <a class="navbar-brand d-flex align-items-center" href="#">
-                        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;"
-                            class="rounded-circle me-2" />
+                        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
                     </a>
                     <p style="
@@ -1355,6 +1353,16 @@
                 if (diff < 2) return "1 day ago";
                 if (diff < 7) return Math.floor(diff) + " days ago";
                 return new Date(dateStr).toLocaleDateString();
+            }
+        });
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+                // Clear the search bar
+                const searchInput = document.querySelector('.search-bar');
+                if (searchInput) {
+                    searchInput.value = '';
+                }
+
             }
         });
     </script>

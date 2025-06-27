@@ -45,34 +45,32 @@ while ($row = $res->fetch_assoc())
 
 
 <body>
-    <div class="container-fluid">
-
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2 class="fw-bold mb-0">Product Links Management</h2>
-                <button class="btn btn-primary btn-sm" id="openModalBtn">
-                    <i class="bi bi-plus-lg"></i> Add Product Link
-                </button>
-            </div>
-
-            <div id="alertBox"></div>
-
-            <div class="table-responsive">
-                <!-- NOTE: the ID is required for DataTables -->
-                <table id="productLinksTable" class="table table-striped align-middle mb-0" style="width:100%">
-                    <thead class="table-light">
-                        <tr>
-                            <th style="width: 60px;">ID</th>
-                            <th>Post</th>
-                            <th style="min-width: 220px;">Product Link</th>
-                            <th style="width: 110px;">Price&nbsp;($)</th>
-                            <th style="width: 110px;">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="linkData"><!-- rows injected by fetchLinks() --></tbody>
-                </table>
-            </div>
+    <div class="container-fluid my-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="fw-bold mb-0">Product Links Management</h2>
+            <button class="btn btn-primary btn-sm" id="openModalBtn">
+                <i class="bi bi-plus-lg"></i> Add Product Link
+            </button>
         </div>
+
+        <div id="alertBox"></div>
+
+        <div class="table-responsive">
+            <!-- NOTE: the ID is required for DataTables -->
+            <table id="productLinksTable" class="table table-striped align-middle mb-0" style="width:100%">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 60px;">ID</th>
+                        <th>Post</th>
+                        <th style="min-width: 220px;">Product Link</th>
+                        <th style="width: 110px;">Price&nbsp;($)</th>
+                        <th style="width: 110px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="linkData"><!-- rows injected by fetchLinks() --></tbody>
+            </table>
+        </div>
+    </div>
     </div>
     <!--  Modal: Add / Edit Product Link  -->
     <div class="modal fade" id="linkModal" tabindex="-1" aria-modal="true">

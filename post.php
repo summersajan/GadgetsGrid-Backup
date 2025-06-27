@@ -593,8 +593,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <a class="navbar-brand d-flex align-items-center" href="#">
-                        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;"
-                            class="rounded-circle me-2" />
+                        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
                     </a>
                     <p style="
@@ -830,7 +829,8 @@ ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', san
         loadMainPost();
     });
     $("#backButton").on("click", function () {
-        window.history.back(); // or use location.href = 'home.php';
+        window.history.back();
+
     });
 </script>
 
