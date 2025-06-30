@@ -3,7 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?= htmlspecialchars($post['title']) ?></title>
+
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Gadgets Grid - Product</title>
+    <meta name="description"
+        content="Explore the latest smart gadgets, health devices, audio tech, and trending tech products on Gadgets Grid. Curated reviews and product highlights updated weekly." />
+    <meta name="keywords"
+        content="gadgets, smart gadgets, tech news, health devices, trending tech, gadget reviews, technology blog, smart home, wearables" />
+    <meta name="author" content="Gadget Grid Team" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://gadgetsgrid.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gadgetsgrid.com/" />
+    <meta property="og:title" content="Gadgets Grid - Discover Innovative Tech & Smart Gadgets" />
+    <meta property="og:description"
+        content="Curated list of smart and trending gadgets including health, wearables, audio tech, and more." />
+    <meta property="og:image" content="https://gadgetsgrid.com/favicons/fav.jpeg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gadgets Grid - Discover Innovative Tech & Smart Gadgets" />
+    <meta name="twitter:description"
+        content="Explore health gadgets, smart home tech, trending accessories, and expert reviews on Gadgets Grid." />
+    <meta name="twitter:image" content="https://gadgetsgrid.com/favicons/fav.jpeg" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -13,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --main: #2563eb;
+            --main: #dc3444;
             /* More vibrant blue */
             --main-light: #dbeafe;
             /* Lighter blue */
@@ -73,9 +107,7 @@
             transition: transform 0.3s var(--transition);
         }
 
-        .navbar-brand:hover img {
-            transform: rotate(5deg);
-        }
+
 
         /* Search bar */
         .search-container {
@@ -512,6 +544,25 @@
             animation-delay: 0.4s;
         }
 
+        .product-image-wrap {
+            height: 200px;
+            width: 100%;
+            background: #f3f3f3;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .main-top-grid {
@@ -539,6 +590,45 @@
                 font-size: 1.3rem;
                 margin: 24px 0 16px;
             }
+        }
+
+        .main-image-wrapper {
+            aspect-ratio: 16 / 9;
+            width: 100%;
+            background: #f3f3f3;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .thumb-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border 0.2s;
+        }
+
+        .thumb-img.active {
+            border: 2px solid #007bff;
+        }
+
+        .subtitle-text {
+            font-size: .98em;
+            color: #555;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .body-text {
+            font-size: .9em;
+            color: #333;
+            font-family: 'Inter', sans-serif;
         }
     </style>
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -659,131 +749,146 @@
         return s.get(name);
     }
 
-    // Renders the Post Detail (gallery/desc/buttons)
+    /* ────────────────────────────────────────────────
+     Renders the Post Detail (gallery + info block)
+     ──────────────────────────────────────────────── */
     function renderPostDetail(d) {
-
         currentPostId = d.post.id;
         currentCategoryId = d.post.category_id;
-        // Gallery markup
-        let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images[0]}" alt="Main" />`;
-        gallery += `<div class="d-flex gallery-thumbs flex-wrap">`;
+
+        // 1. Gallery markup
+        let gallery = `
+       <div class="main-image-wrapper mb-3" style="position: relative; width: 100%; padding-top: 64%; overflow: hidden;">
+    <img id="mainImgView"
+         src="${d.images[0]}"
+         alt="Main Image"
+         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block;" />
+</div>
+
+        <div class="d-flex gallery-thumbs flex-wrap gap-2">
+    `;
         d.images.forEach((img, i) => {
-            gallery += `<img src="${img}" class="thumb-img${i == 0 ? ' active' : ''}" data-img="${img}" alt="image ${i}">`;
+            gallery += `
+            <img 
+                src="${img}" 
+                data-img="${img}" 
+                alt="image ${i}" 
+                class="thumb-img${i === 0 ? ' active' : ''}"
+            />
+        `;
         });
         gallery += `</div>`;
 
-        // Detail info
-        let pd = d.post;
+        // 2. Detail Info
+        const pd = d.post;
         let badges = '';
-
-
-        console.log(pd);
-
+        const prices = [];
+        const metaArr = [];
 
         $("#currentCategoryName").text(pd.category_name || "All Products");
 
-        if (pd.category_name) badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
-        if (pd.is_featured == 1) {
+        if (pd.category_name)
+            badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
+        if (pd.is_featured == 1)
             badges += `<span class="badge bg-warning-subtle text-warning-emphasis me-2">Featured</span>`;
-        }
-        if (pd.is_trending == 1) {
+        if (pd.is_trending == 1)
             badges += `<span class="badge bg-danger-subtle text-danger me-2">Trending</span>`;
-        }
-        if (pd.status == 'draft') badges += `<span class="badge bg-secondary">Draft</span>`;
+        if (pd.status === 'draft')
+            badges += `<span class="badge bg-secondary">Draft</span>`;
 
-        let links = '';
-        (d.product_links || []).forEach(link => {
-            links += `<a class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2"
-                href="${link.product_link}" target="_blank" rel="nofollow noopener">
-                <i class="bi bi-cart-check me-2"></i>
-                ${link.price !== null && link.price !== "" ? 'Get it for <span class="fw-bold ms-1 me-2">$' + parseFloat(link.price).toFixed(2) + '</span>' : 'Get this Product'}
-            </a>`;
-        });
+        const links = (d.product_links || []).map(link => `
+        <a href="${link.product_link}" target="_blank" rel="nofollow noopener"
+            class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2">
+            <i class="bi bi-cart-check me-2"></i>
+            ${link.price ? `Get it for <span class="fw-bold ms-1 me-2">$${(+link.price).toFixed(2)}</span>` : 'Get this Product'}
+        </a>
+    `).join('');
 
-        let prices = '';
-        if (pd.price || pd.old_price) {
-            prices += pd.old_price ? `<span class="old-price me-2 text-decoration-line-through">$${parseFloat(pd.old_price).toFixed(2)}</span>` : '';
-            prices += pd.price ? `<span class="fw-bold text-warning-emphasis">$${parseFloat(pd.price).toFixed(2)}</span>` : '';
-            if (pd.discount) prices += `<span class="discount-badge ms-2">${pd.discount} OFF</span>`;
-        }
+        if (pd.old_price)
+            prices.push(`<span class="old-price me-2 text-decoration-line-through">$${(+pd.old_price).toFixed(2)}</span>`);
+        if (pd.price)
+            prices.push(`<span class="fw-bold text-warning-emphasis">$${(+pd.price).toFixed(2)}</span>`);
+        if (pd.discount)
+            prices.push(`<span class="discount-badge ms-2">${pd.discount} OFF</span>`);
 
-        let meta = `<span><i class="bi bi-clock"></i> ${pd.created_at.substr(0, 10)}</span>`;
-        if (pd.updated_at && pd.updated_at != pd.created_at)
-            meta += `<span class="ms-2">Updated ${pd.updated_at.substr(0, 10)}</span>`;
+        metaArr.push(`<i class="bi bi-clock"></i> ${pd.created_at.substr(0, 10)}`);
+        if (pd.updated_at && pd.updated_at !== pd.created_at)
+            metaArr.push(`Updated ${pd.updated_at.substr(0, 10)}`);
 
-        let postHtml = `
+        // 3. Final layout
+        const postHtml = `
         <div class="detail-card row gx-5 gy-4">
-            <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
+            <div class="col-12 col-md-6 detail-gallery">
+                ${gallery}
+            </div>
             <div class="col-12 col-md-6">
-               
                 <div class="card-title mb-3">${pd.title}</div>
-                 <div class="d-flex mb-2 align-items-center">${badges}</div>
-                  <div class="mb-3 meta-wrap text-muted small">${meta}</div>
-                ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
-${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
-
-                ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
+                <div class="d-flex mb-2 align-items-center">${badges}</div>
+                <div class="mb-3 meta-wrap text-muted small">${metaArr.join(' · ')}</div>
+                ${pd.subtitle ? `<div class="mb-2 subtitle-text">${pd.subtitle}</div>` : ''}
+                ${pd.body ? `<div class="mb-2 body-text">${pd.body.replace(/\n/g, '<br>')}</div>` : ''}
+                ${prices.length ? `<div class="price-wrap mb-2">${prices.join('')}</div>` : ''}
                 ${links}
             </div>
         </div>
     `;
         $('#postDetail').html(postHtml);
 
-        // Gallery click handler
+        // 4. Gallery click handler
         $('.thumb-img').on('click', function () {
             $('.thumb-img').removeClass('active');
             $(this).addClass('active');
-            $('#mainImgView').attr('src', $(this).attr('data-img'));
+            $('#mainImgView').attr('src', $(this).data('img'));
         });
     }
 
-    // Render related posts
+
+    /* ────────────────────────────────────────────────
+       Renders the “Related Products” grid
+       ──────────────────────────────────────────────── */
     function renderPosts(posts) {
-        let html = `<h3 class="section-title">Related Products</h3><div class="row g-4">`;
+        let html = `
+        <h3 class="section-title">Related Products</h3>
+        <div class="row g-4">
+    `;
+
         posts.forEach(post => {
-            html += `<div class="col-12 col-sm-6 col-md-3 product-row">
-            <div class="card h-100">
-                <img src="${post.thumbnail || 'images/default.jpg'}" class="card-img-top" alt="${post.title.replace(/"/g, '&quot;')}" />
-                <div class="card-body">
-                    <h6 class="card-title">${post.title}</h6>
-                    <div class="product-date text-muted small"><i class="bi bi-clock"></i> ${post.created_at.substr(0, 10)}</div>
-                    <a href="?id=${post.id}" class="btn btn-outline-primary btn-sm mt-2 w-100">View</a>
+            const thumb = post.thumbnail || 'images/default.jpg';
+            const safeTitle = (post.title || '').replace(/"/g, '&quot;');
+
+            html += `
+            <div class="col-12 col-sm-6 col-md-3 product-row">
+                <div class="card h-100">
+                    <div class="product-image-wrap">
+                        <img 
+                            src="${thumb}" 
+                            alt="${safeTitle}" 
+                            class="product-image" 
+                        />
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title mb-1">${post.title}</h6>
+                        <div class="product-date text-muted small flex-grow-1">
+                            <i class="bi bi-clock"></i> ${post.created_at?.substr(0, 10) || ''}
+                        </div>
+                        <a 
+                            href="?id=${post.id}" 
+                            class="btn btn-outline-primary btn-sm mt-auto w-100"
+                        >
+                            View
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>`;
+        `;
         });
-        html += `</div>`;
-        $("#allPostsSection").html(html);
-    }
-
-    function renderPosts(posts) {
-
-        let html = `<h3 class="section-title">Related Product</h3><div class="row g-4">`;
-
-        if (posts.length === 0) {
-            html += `<div class="col-12"><div class="alert alert-info">No product found</div></div>`;
-        } else {
-            posts.forEach((post, i) => {
-                html += `
-                <div class="col-12 col-sm-6 col-md-3 product-row">
-                    <a class="text-decoration-none text-dark" href="?id=${post.id}">
-                        <div class="product-card animate-fade-in delay-${i}" data-category-id="${post.category_id}">
-                            <img src="${post.thumbnail || "images/default.jpg"}" alt="${post.title.replace(/"/g, '&quot;')}" />
-                            <div class="p-3">
-                                <h6 class="card-title">${post.title}</h6>
-                                <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            `;
-            });
-        }
-
 
         html += `</div>`;
         $("#allPostsSection").html(html);
     }
+
+
+
     function timeAgo(dateStr) {
         if (!dateStr) return "";
         let diff = (new Date() - new Date(dateStr)) / (1000 * 60 * 60 * 24);

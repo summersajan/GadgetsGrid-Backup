@@ -1,5 +1,7 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "gadget");
+//$conn = new mysqli("localhost", "root", "", "gadget");
+
+$conn = new mysqli("localhost", "u860864837_GadgetsGridU", "Wt9|1&Fj|!", "u860864837_Gadgets_GridDB");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

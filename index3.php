@@ -54,6 +54,7 @@
       --dark: #1e293b;
       /* Deep slate blue for text */
       --text-muted: #64748b;
+
       /* Muted slate blue */
       --br: 16px;
       /* Slightly tighter border radius */
@@ -61,44 +62,37 @@
     }
 
     body {
-      background: #fff;
-
+      background: var(--gray-bg);
       color: var(--dark);
       /* font-family: "Outfit", sans-serif; */
       font-family: "Urbanist", sans-serif;
       /*font-family: "DM Sans", sans-serif;*/
       line-height: 1.6;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
-      border: 1px solid #eee;
-      margin: 10px 10px 0 10px;
     }
 
 
+    /* Header */
     .sticky-header {
-      background: #fff;
-      padding: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 15px rgba(0, 0, 0, 0.03);
+      padding: 2px 0;
       position: sticky;
       top: 0;
       z-index: 1000;
-
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
     }
 
     .navbar-brand {
-      font-weight: 900;
-      font-size: 2rem;
-      letter-spacing: -1.2px;
-      color: #222;
-      display: flex;
-      align-items: center;
-      margin-right: 32px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -0.5px;
+      color: var(--main-dark);
+      transition: transform 0.3s var(--transition);
     }
 
-    .navbar-brand .brand-red {
-      color: #e3343a;
-      font-weight: 900;
-      margin-left: -6px;
+    .navbar-brand:hover {
+      transform: scale(1.02);
     }
 
     .navbar-brand img {
@@ -109,66 +103,40 @@
       transition: transform 0.3s var(--transition);
     }
 
+
+    /* Search bar */
     .search-container {
       position: relative;
-      max-width: 540px;
-      flex: 1 1 auto;
-      margin-right: 32px;
+      max-width: 400px;
+      margin-left: auto;
     }
 
     .search-bar {
-      border-radius: 24px;
-      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
       background: #fff;
-      font-size: 17px;
-      padding: 12px 20px 12px 44px;
+      font-size: 15px;
+      padding: 12px 20px 12px 42px;
       width: 100%;
-      height: 50px;
-      box-shadow: none;
+      height: 48px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s var(--transition);
       font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
-      transition: border-color 0.22s;
     }
 
     .search-bar:focus {
-      border-color: #e3343a;
+      border-color: var(--main);
+      box-shadow: 0 0 0 3px var(--main-light);
       outline: none;
     }
 
     .search-icon {
       position: absolute;
-      left: 18px;
+      left: 16px;
       top: 50%;
       transform: translateY(-50%);
-      color: #969fa6;
-      font-size: 1.18em;
-    }
-
-    /* Auth Buttons */
-    .header-auth-btn {
-      border-radius: 24px;
-      font-weight: 700;
-      font-size: 1em;
-      border: 2px solid #e3343a;
-      padding: 8px 24px;
-      margin-left: 12px;
-      background: transparent;
-      color: #e3343a;
-      transition: all 0.2s;
-    }
-
-    .header-auth-btn.cta {
-      background: #e3343a;
-      color: #fff;
-      border-color: #e3343a;
-    }
-
-    .header-auth-btn.cta:hover {
-      background: #c5162a;
-      color: #fff;
-    }
-
-    .header-auth-btn:hover {
-      background: #e3343a14;
+      color: var(--text-muted);
+      pointer-events: none;
     }
 
     /* Categories */
@@ -439,12 +407,12 @@
       margin: 0;
     }
 
-    /* Now Trending */
+    /* ============================= */
+    /*         Now Trending Card     */
+    /* ============================= */
     .now-trending-card {
       border-radius: var(--br);
-      background: linear-gradient(135deg,
-          var(--main) 0%,
-          var(--main-dark) 100%);
+      background: linear-gradient(135deg, var(--main) 0%, var(--main-dark) 100%);
       padding: 24px;
       color: #fff;
       box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
@@ -454,8 +422,7 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
-      transition: transform 0.4s var(--transition),
-        box-shadow 0.4s var(--transition);
+      transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
     }
 
     .now-trending-card:hover {
@@ -470,13 +437,14 @@
       right: -50%;
       width: 200%;
       height: 200%;
-      background: radial-gradient(circle,
-          rgba(255, 255, 255, 0.1) 0%,
-          rgba(255, 255, 255, 0) 70%);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
       transform: rotate(30deg);
       pointer-events: none;
     }
 
+    /* ============================= */
+    /*         Header Section        */
+    /* ============================= */
     .now-trending-card .trend-top {
       display: flex;
       justify-content: space-between;
@@ -511,28 +479,69 @@
       font-size: 0.8rem;
     }
 
+    /* ============================= */
+    /*       Trending List Items     */
+    /* ============================= */
     .now-trending-list {
       list-style: none;
       padding: 0;
       margin: 0;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+      display: block;
     }
-
-
 
     .now-trending-list li {
-      display: flex;
-      align-items: flex-start;
-      font-weight: 500;
-      margin-bottom: 12px;
-      line-height: 1.4;
-      gap: 8px;
-      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
     }
 
+    .now-trending-list li a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .now-trending-list li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* radial light effect */
+    .now-trending-list li a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 0% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+      transform: scaleX(0);
+      transform-origin: 0% 50%;
+      transition: transform 0.35s var(--transition);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .now-trending-list li a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(6px);
+    }
+
+    .now-trending-list li a:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* optional: animate chevron/icon */
+    .now-trending-list li a i {
+      transition: transform 0.35s var(--transition);
+      z-index: 1;
+    }
+
+    .now-trending-list li a:hover i {
+      transform: translateX(2px) rotate(15deg);
+    }
+
+    /* numbered circle */
     .now-trending-list .trend-num {
       width: 28px;
       height: 28px;
@@ -543,7 +552,6 @@
       color: var(--main);
       border-radius: 50%;
       font-weight: 700;
-      margin-right: 8px;
       font-size: 0.9rem;
       flex-shrink: 0;
     }
@@ -817,27 +825,29 @@
 <nav class="sticky-header">
   <div class="container-lg">
     <div class="d-flex flex-column">
-      <div class="d-flex align-items-center py-3 px-2">
-        <!-- Logo: text, not image -->
+      <div class="d-flex align-items-center">
+        <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
         </a>
-        <!-- Search Bar -->
+        <!-- Search -->
         <div class="search-container ms-auto">
           <i class="bi bi-search search-icon"></i>
-          <input class="search-bar" type="search" placeholder="Search for gadgets, reviews, and tech news..." />
+          <input class="search-bar" type="search" placeholder="Search gadgets, tech, reviews..." />
         </div>
-        <button class="header-auth-btn">Contact Us</button>
-        <button class="header-auth-btn cta">Subscribe</button>
       </div>
-      <!-- Categories row -->
+
+      <!-- Categories (will be loaded dynamically) -->
+
       <div class="category-chip-scroll">
-        <div class="header-chips-row mt-0" id="categoryChips"></div>
+        <div class="header-chips-row mt-2" id="categoryChips"></div>
       </div>
+
     </div>
   </div>
 </nav>
+
 
 
 <section class="top-section container-lg mt-4" id="top-section">
@@ -882,11 +892,6 @@
 <section class="container-lg my-4" id="trendingSection">
 
 </section>
-<div class="container-lg my-4" id="main-content">
-
-</div>
-
-
 <!-- All Posts Section -->
 <section class="container-lg mt-5" id="allPostsSection"></section>
 <div class="d-flex justify-content-center mt-3">
@@ -972,9 +977,6 @@
     sectionViewMode = "all";
   currentSearch = '';
 
-  // holds combined/unique results for search mode:
-  let searchResultsPosts = [];
-
   const FEATURED_PAGE_SIZE = 4, TRENDING_PAGE_SIZE = 4, ALL_PAGE_SIZE = 4;
 
   $(function () {
@@ -1009,16 +1011,8 @@
 
         activeCategory = getActiveCategory();
 
-        // Only change for search result rendering
-        if (sectionViewMode === "search" && currentSearch) {
-          // combine and deduplicate by ID
-          const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
-          const map = new Map();
-          allComb.forEach(post => {
-            if (post && post.id) map.set(post.id, post);
-          });
-          searchResultsPosts = Array.from(map.values());
-        }
+
+
 
         renderTagAboveMain();
         renderCategoryChips();
@@ -1057,15 +1051,8 @@
 
         activeCategory = getActiveCategory();
 
-        // Only change for search result rendering
-        if (sectionViewMode === "search" && currentSearch) {
-          const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
-          const map = new Map();
-          allComb.forEach(post => {
-            if (post && post.id) map.set(post.id, post);
-          });
-          searchResultsPosts = Array.from(map.values());
-        }
+
+
 
         renderTagAboveMain();
         renderCategoryChips();
@@ -1075,6 +1062,9 @@
         $("#top-section").hide();
       });
     }
+
+
+
 
     function renderTagAboveMain() {
       let html = "";
@@ -1145,6 +1135,7 @@
       });
     }
 
+
     let currentCategoryId = "all"; // default
 
     function renderCategoryChips() {
@@ -1154,8 +1145,12 @@
       );
       $("#categoryChips").html(chips);
 
+      // Apply "active" class based on selected category
       $(".category-chip").removeClass("active");
       $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
+
+
+
 
       $(".category-chip").off("click").on("click", function (e) {
         let $this = $(this);
@@ -1169,7 +1164,7 @@
         $this.css('--ripple-y', `${y}px`);
         $this.addClass('ripple');
 
-        setTimeout(() => $this.removeClass('ripple'), 400);
+        setTimeout(() => $this.removeClass('ripple'), 400); // remove after animation
 
         // Active logic
         let catid = $this.data("category-id").toString();
@@ -1182,13 +1177,17 @@
         featuredPosts = [];
         trendingPosts = [];
         allLoadedPosts = [];
-        searchResultsPosts = [];
         currentSearch = '';
         $(".search-bar").val("");
 
         fetchAndRenderAll();
       });
+
+
     }
+
+
+
 
     function getActiveCategoryId() {
       return ($(".category-chip.active").data("category-id") || "all").toString();
@@ -1199,56 +1198,31 @@
       return allCategories.find(c => c.id == catId) || null;
     }
 
-    // SEARCH (this is the main changed code)
+    // SEARCH
     $(".search-bar").on("input", function () {
       let val = ($(this).val() || "").trim();
+      console.log(val);
       if (!val) {
         currentSearch = '';
         sectionViewMode = 'all';
-        searchResultsPosts = [];
         fetchAndRenderAll();
       } else {
         currentSearch = val;
-        sectionViewMode = "search"; // key: set to "search" mode
+        sectionViewMode = "all";
         featuredPosts = [];
         trendingPosts = [];
         allLoadedPosts = [];
-        searchResultsPosts = [];
         featuredOffset = trendingOffset = allOffset = 0;
 
         fetchAndRenderAll1();
+
       }
     });
 
-    function renderHeroCardOrCategoryBanner() {
-      // Only show in normal browsing/category mode
-      if (sectionViewMode === "search" || sectionViewMode === "trending") {
-        $("#exclusiveLaunchContainer").hide();
-        $("#categoryImage").hide();
-        $(".now-trending-card").hide();
-        $("#top-section").hide();
-        return;
-      }
-      $("#top-section").show();
-      if (activeCategory) {
-        let image = activeCategory.category_image ? activeCategory.category_image : "category/default-category.jpg";
-        let html = `<div style="background:url('category/${image}') center center/cover no-repeat; position:relative; height:400px; border-radius:12px; box-shadow:0 5px 18px rgba(0,0,0,0.08); ">
-                    <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
-                        ${activeCategory.category_name}
-                    </div>
-                </div>`;
-        $("#exclusiveLaunchContainer").hide();
-        $(".now-trending-card").hide();
-        $("#categoryImage").show().html(html);
-      } else {
-        renderHeroCard();
-        $("#exclusiveLaunchContainer").show();
-        $(".now-trending-card").show();
-        $("#categoryImage").hide();
-      }
-    }
+
     function renderHeroCard() {
       if (!heroPost) return;
+
       let exHtml;
       if (heroPost) {
         exHtml = `
@@ -1258,11 +1232,16 @@
             </span>
             <a href="post.php?id=${heroPost.id}" class="stretched-link"></a>
             <style>
-                #exclusiveLaunchContainer {
-                    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
-                    background-size:cover;
-                    background-position:center;
-                }
+        #exclusiveLaunchContainer {
+    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : "images/spa.jpg"}');
+    background-size: cover; /* Fills width & height */
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 500px; /* or whatever height you want */
+}
+
+
             </style>
         `;
       } else {
@@ -1273,11 +1252,52 @@
       }
 
       $("#exclusiveLaunchContainer").html(exHtml);
+
+
+
+
+
+
     }
+
+
+
+    function renderHeroCardOrCategoryBanner() {
+      if (sectionViewMode === "search" || sectionViewMode === "trending") {
+        $("#exclusiveLaunchContainer").hide();
+        $("#categoryImage").hide();
+        $(".now-trending-card").hide();
+        $("#top-section").hide();
+        return;
+      }
+
+      $("#top-section").show();
+
+      if (activeCategory) {
+        let image = activeCategory.category_image ? activeCategory.category_image : "category/default-category.jpg";
+
+        let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08);">
+   <img src="category/${image}" style="width:100%; height:100%; margin:auto;">
+    <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
+        ${activeCategory.category_name}
+    </div>
+</div>`;
+
+        $("#exclusiveLaunchContainer").hide();
+        $(".now-trending-card").hide();
+        $("#categoryImage").show().html(html);
+      } else {
+        renderHeroCard();
+        $("#exclusiveLaunchContainer").show();
+        $(".now-trending-card").show();
+        $("#categoryImage").hide();
+      }
+    }
+
+
 
     // Now Trending sidebar
     function renderNowTrendingSidebar() {
-      // do NOT show in search
       if (activeCategory || sectionViewMode === "search" || sectionViewMode === "trending") {
         $("#nowTrendingList").empty();
         return;
@@ -1299,53 +1319,30 @@
         e.preventDefault();
         sectionViewMode = 'trending';
         featuredPosts = []; trendingPosts = []; allLoadedPosts = [];
-        searchResultsPosts = [];
         featuredOffset = trendingOffset = allOffset = 0;
         $(".search-bar").val("");
         fetchAndRenderAll();
       });
     }
 
-    // ** SEARCH: Only render one section with all matched unique posts **
-    function renderSearchResultsSection() {
-      if (!searchResultsPosts.length) {
-        $("#searchResultsSection").html(`<h3 class="section-title">Search Results</h3><p>No products found.</p>`).show();
-        return;
-      }
-      let html = `<h3 class="section-title">Search Results</h3><div class="row g-4">`;
-      searchResultsPosts.forEach((post, i) => html += renderPostCard(post, i));
-      html += `</div>`;
-      $("#searchResultsSection").html(html).show();
-    }
-
     function renderSections() {
       if (sectionViewMode === "trending") {
         $("#featuredSection").hide();
-        $("#trendingSection").show(); // needed for trending
         $("#allPostsSection").hide();
-        $("#searchResultsSection").hide();
         $("#top-section").hide();
         renderTrendingSection();
-      }
-      else if (sectionViewMode === "search" && currentSearch) {
-        // Hide all non essential sections
+      } else if (sectionViewMode === "search") {
         $("#featuredSection").hide();
         $("#trendingSection").hide();
-        $("#allPostsSection").hide();
-        $("#top-section").hide();
-        // Remove any previous searchResultsSection
-        $("#searchResultsSection").remove();
-        // Insert searchResultsSection into #main-content (adjust selector if needed)
-        $("<div id='searchResultsSection'></div>").appendTo("#main-content");
-        renderSearchResultsSection();
-      }
-      else {
-        $("#searchResultsSection").remove();
+        $("#allPostsSection").show();
+        renderAllPostsSection();
+      } else {
         renderFeaturedSection();
         renderTrendingSection();
         renderAllPostsSection();
       }
     }
+
     function renderFeaturedSection() {
       if (!featuredPosts.length) {
         $("#featuredSection").hide();
@@ -1399,6 +1396,8 @@
       });
     }
 
+
+
     function renderPostCard(post, i) {
       return `
         <div class="col-12 col-sm-6 col-md-3 product-row">
@@ -1443,6 +1442,7 @@
       if (searchInput) {
         searchInput.value = '';
       }
+
     }
   });
 </script>

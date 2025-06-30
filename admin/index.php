@@ -330,8 +330,9 @@ while ($row = $catRes->fetch_assoc()) {
                 contentType: false, processData: false,
                 dataType: "json",
                 success: function (res) {
+                    postModal.hide();
                     if (res.status == 1) {
-                        postModal.hide();
+
                         showAlert(res.message, "success");
                         // fetchPosts();
                         resetForm();

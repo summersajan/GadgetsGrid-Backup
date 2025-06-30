@@ -203,8 +203,9 @@ while ($row = $postRes->fetch_assoc())
                 processData: false,
                 dataType: 'json',
                 success: res => {
+                    imageModal.hide();
                     if (res.status === 1) {
-                        imageModal.hide();
+
                         showAlert(res.message, 'success');
                         $('#imageModal').on('hidden.bs.modal', function () {
                             // fetchImages();

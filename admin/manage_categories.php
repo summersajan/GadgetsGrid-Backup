@@ -203,22 +203,30 @@ while ($row = $postRes->fetch_assoc())
                 processData: false,
                 contentType: false,
                 success: function (res) {
-                    try { res = JSON.parse(res); } catch { res = { status: 0, message: 'Server error' }; }
-
+                    try {
+                        res = JSON.parse(res);
+                    } catch (e) {
+                        console.error("JSON parse error:", e, res);
+                        res = { status: 0, message: 'Server error (invalid JSON response)' };
+                    }
+                    cModal.hide();
                     if (res.status == 1) {
-                        cModal.hide();
+
                         showAlert(res.message, 'success');
-
-
                         setTimeout(() => {
                             location.reload();
                         }, 300);
-                    }
-                    else {
+                    } else {
                         showAlert(res.message, 'danger');
                     }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error:", status, error);
+                    console.error("Response text:", xhr.responseText);
+                    showAlert("AJAX Error: " + error + " (" + status + ")", 'danger');
                 }
             });
+
         });
 
         /* ---- Edit ---- */

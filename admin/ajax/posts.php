@@ -7,6 +7,25 @@ function now()
     return date("Y-m-d H:i:s");
 }
 
+function resp($st, $msg)
+{
+    echo json_encode(['status' => $st, 'message' => $msg]);
+    exit;
+}
+
+function isValidImage($file): bool
+{
+    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if (!in_array($ext, $allowed)) {
+        resp(0, 'Only JPG, PNG, GIF, and WEBP files are allowed.');
+    }
+    if ($file['size'] > 1048576) {
+        resp(0, 'Image size must be under 1 MB.');
+    }
+    return true;
+}
+
 // === Fetch Categories for lookup ===
 $catRes = $conn->query("SELECT id, category_name FROM tbl_category");
 $catArr = [];
@@ -52,16 +71,19 @@ if ($action == 'add' || $action == 'update') {
     $subtitle = $conn->real_escape_string($_POST['subtitle'] ?? '');
     $category_id = intval($_POST['category_id'] ?? 0);
     $body = $conn->real_escape_string($_POST['body'] ?? '');
-    $tags = $conn->real_escape_string($_POST['tags'] ?? ''); // NEW: get and escape tags
+    $tags = $conn->real_escape_string($_POST['tags'] ?? '');
     $is_featured = isset($_POST['is_featured']) ? 1 : 0;
     $is_trending = isset($_POST['is_trending']) ? 1 : 0;
     $status = $conn->real_escape_string($_POST['status'] ?? '');
     $thumbnailPath = '';
 
     if (isset($_FILES['thumbnail']) && $_FILES['thumbnail']['error'] == 0) {
+        isValidImage($_FILES['thumbnail']); // ✅ validate image
+
         $uploadDir = '../../images/';
         $filename = time() . '_' . basename($_FILES['thumbnail']['name']);
         $target = $uploadDir . $filename;
+
         if (move_uploaded_file($_FILES['thumbnail']['tmp_name'], $target)) {
             $thumbnailPath = "images/" . $filename;
         } else {

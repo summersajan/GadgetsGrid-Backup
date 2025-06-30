@@ -13,11 +13,16 @@ $uploadDir = '../../category/';
 function saveImage($field, $oldFile = ''): string
 {
     if (empty($_FILES[$field]['name']))
-        return $oldFile;              // nothing uploaded
+        return $oldFile; // nothing uploaded
 
     /* validate */
     if ($_FILES[$field]['error'] !== UPLOAD_ERR_OK)
         resp(0, 'Image upload failed!');
+
+    // Check file size (1 MB = 1048576 bytes)
+    if ($_FILES[$field]['size'] > 1048576)
+        resp(0, 'Image size must be under 1 MB');
+
     $ext = strtolower(pathinfo($_FILES[$field]['name'], PATHINFO_EXTENSION));
     $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     if (!in_array($ext, $allowed))
@@ -32,8 +37,10 @@ function saveImage($field, $oldFile = ''): string
     /* remove old */
     if ($oldFile && file_exists($uploadDir . $oldFile))
         unlink($uploadDir . $oldFile);
+
     return $newName;
 }
+
 /* ----------------------------------- */
 
 $action = $_POST['action'] ?? '';

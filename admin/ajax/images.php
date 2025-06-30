@@ -3,8 +3,26 @@ require '../config/db.php';
 require 'security.php';
 $action = $_POST['action'] ?? '';
 
+function resp($st, $msg)
+{
+    echo json_encode(['status' => $st, 'message' => $msg]);
+    exit;
+}
+
+function isValidImage($file): bool
+{
+    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    if (!in_array($ext, $allowed)) {
+        resp(0, 'Only JPG, PNG, GIF, and WEBP files are allowed.');
+    }
+    if ($file['size'] > 1048576) {
+        resp(0, 'Image size must be under 1 MB.');
+    }
+    return true;
+}
+
 if ($action === 'fetch') {
-    // Fetch join with post title for display
     $q = "SELECT i.*, p.title as post_title 
           FROM tbl_images i 
           LEFT JOIN tbl_posts p ON i.post_id=p.id 
@@ -31,14 +49,10 @@ if ($action === 'fetch') {
     exit;
 }
 
-function resp($st, $msg)
-{
-    echo json_encode(['status' => $st, 'message' => $msg]);
-    exit;
-}
-
 if ($action === 'add') {
     if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === 0) {
+        isValidImage($_FILES['image_file']); // 👈 validation added here
+
         $targetDir = "../../images/";
         $filename = time() . '_' . basename($_FILES["image_file"]["name"]);
         $targetFile = $targetDir . $filename;
@@ -54,15 +68,19 @@ if ($action === 'add') {
         } else {
             resp(0, "File upload failed.");
         }
-    } else
+    } else {
         resp(0, "No file chosen.");
+    }
 }
 
 if ($action === 'update') {
     $id = intval($_POST['id']);
     $post_id = intval($_POST['post_id']);
     $updateQuery = "UPDATE tbl_images SET post_id = $post_id";
+
     if (isset($_FILES['image_file']) && $_FILES['image_file']['error'] === 0) {
+        isValidImage($_FILES['image_file']); // 👈 validation added here
+
         $targetDir = "../../images/";
         $filename = time() . '_' . basename($_FILES["image_file"]["name"]);
         $targetFile = $targetDir . $filename;
@@ -71,6 +89,7 @@ if ($action === 'update') {
             $updateQuery .= ", image_url = '$pathInDB'";
         }
     }
+
     $updateQuery .= " WHERE id = $id";
     if ($conn->query($updateQuery))
         resp(1, "Image updated.");
@@ -80,7 +99,6 @@ if ($action === 'update') {
 
 if ($action === 'delete') {
     $id = intval($_POST['id']);
-    // Remove file
     $res = $conn->query("SELECT image_url FROM tbl_images WHERE id=$id");
     if ($row = $res->fetch_assoc()) {
         $fp = "../../" . $row['image_url'];
