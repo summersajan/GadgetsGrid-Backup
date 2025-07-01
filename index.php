@@ -58,17 +58,21 @@
             --br: 16px;
             /* Slightly tighter border radius */
             --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+            --chips: #e11d48;
+
+            --chips-light: #fef2f2;
         }
 
         body {
-            background: #fff;
+
 
             color: var(--dark);
             /* font-family: "Outfit", sans-serif; */
             font-family: "Urbanist", sans-serif;
             /*font-family: "DM Sans", sans-serif;*/
             line-height: 1.6;
-            background: #fff;
+            background: #f8f9fa;
             border-radius: 12px;
             box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
             border: 1px solid #eee;
@@ -112,9 +116,12 @@
         .search-container {
             position: relative;
             max-width: 540px;
-            flex: 1 1 auto;
-            margin-right: 32px;
+            width: 100%;
+            margin: 0 auto;
+            /* centers the container */
+            flex: 1 1 100%;
         }
+
 
         .search-bar {
             border-radius: 24px;
@@ -171,149 +178,143 @@
             background: #e3343a14;
         }
 
-        /* Categories */
+        /* Layout */
+        .category-chip-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            background: #fff;
+        }
+
         .header-chips-row {
             display: flex;
+            flex-wrap: nowrap;
             overflow-x: auto;
-            padding: 2px 0;
+            overflow-y: hidden;
+            align-items: stretch;
+            gap: .5rem;
+            border-bottom: 2.5px solid #f3f4f6;
+            width: 100%;
+            min-height: 53px;
             scrollbar-width: none;
-
             -ms-overflow-style: none;
-
+            background: #fff;
         }
 
         .header-chips-row::-webkit-scrollbar {
             display: none;
-
         }
 
-        .category-chip-scroll,
-
-        #categoryChips {
-
-            display: flex;
-
-            overflow-x: auto;
-
-            -webkit-overflow-scrolling: touch;
-
-            scroll-snap-type: x proximity;
-
-            gap: .5rem;
-
-            padding-bottom: 4px;
-
-        }
-
-        .category-chip-scroll::-webkit-scrollbar,
-        #categoryChips::-webkit-scrollbar {
-
-            height: 4px;
-
-        }
-
-        .category-chip-scroll::-webkit-scrollbar-track,
-        #categoryChips::-webkit-scrollbar-track {
-            background: transparent;
-
-        }
-
-        .category-chip-scroll::-webkit-scrollbar-thumb,
-        #categoryChips::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, .35);
-
-            border-radius: 2px;
-        }
-
-
-        .category-chip-scroll,
-        #categoryChips {
-            scrollbar-width: thin;
-
-            scrollbar-color: rgba(0, 0, 0, .35) transparent;
-        }
-
-
-        @media (hover: none) {
-
-            .category-chip-scroll::-webkit-scrollbar-thumb,
-            #categoryChips::-webkit-scrollbar-thumb {
-                visibility: visible;
-            }
+        .category-chip-scroll::-webkit-scrollbar {
+            display: none;
         }
 
         .category-chip {
             position: relative;
-            scroll-snap-align: start;
-            border-radius: 12px;
-            background: #fff;
-            color: var(--text-muted);
-            padding: 8px 16px;
-            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            border-radius: 0;
+            background: transparent;
+            color: #374151;
+            padding: 0 24px;
+            font-size: 15px;
             font-weight: 500;
-            margin-right: 8px;
-            border: 1px solid #e2e8f0;
-            white-space: nowrap;
-            transition: all 0.3s var(--transition);
-            cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-            overflow: hidden;
-
+            margin: 0;
+            border: none;
+            border-bottom: 3px solid transparent;
+            height: 53px;
             flex: 0 0 auto;
+            min-width: 80px;
+            max-width: 140px;
+            /* Avoids huge category names */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            transition: background .22s, color .22s, border-bottom .22s;
+            box-sizing: border-box;
         }
 
+        .category-chip .cat-icon {
+            width: 21px;
+            height: 21px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            opacity: 0.92;
+            display: flex;
+            align-items: center;
+        }
 
-        .category-chip::before {
-            content: "";
-            width: 6px;
-            height: 6px;
-            background: var(--main);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            vertical-align: middle;
-            transition: all 0.3s var(--transition);
+        .category-chip[data-category-id="all"] {
+            color: var(--chips);
+            background: linear-gradient(90deg, var(--chips-light) 70%, rgba(255, 255, 255, 0));
+            border-bottom: 3px solid var(--chips);
+            font-weight: bold;
+        }
+
+        .category-chip[data-category-id="all"] .cat-icon {
+            color: var(--chips);
         }
 
         .category-chip.active,
         .category-chip:hover {
-            border-color: var(--main);
-            color: var(--main-dark);
-            background: var(--main-light);
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+            color: var(--chips);
+            background: rgba(251, 233, 236, 0.30);
+            border-bottom: 3px solid var(--chips);
         }
 
-        .category-chip.clicked {
-            transform: scale(0.95);
+        .category-chip.active .cat-icon,
+        .category-chip:hover .cat-icon {
+            color: var(--chips);
         }
 
-        .category-chip.active::before,
-        .category-chip:hover::before {
-            background: var(--main-dark);
-            transform: scale(1.3);
+        .category-chip:not([data-category-id="all"]).active,
+        .category-chip:not([data-category-id="all"]):hover {
+            font-weight: 600;
         }
 
+        .category-chip::before,
         .category-chip::after {
-            content: '';
-            position: absolute;
-            top: var(--ripple-y, 50%);
-            left: var(--ripple-x, 50%);
-            transform: translate(-50%, -50%) scale(0);
-
-            width: 100px;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.4s ease, opacity 0.8s ease;
+            display: none !important;
         }
 
-        .category-chip.ripple::after {
-            transform: translate(-50%, -50%) scale(2.5);
-            opacity: 1;
+        @media (max-width: 900px) {
+            .category-chip {
+                font-size: 14px;
+                min-width: 70px;
+                max-width: 100px;
+                padding: 0 13px;
+            }
+
+            .header-chips-row {
+                gap: .3rem;
+            }
         }
 
+
+
+        @media (max-width: 600px) {
+            .category-chip {
+                font-size: 13px;
+                min-width: 60px;
+                max-width: 92px;
+                padding: 0 9px;
+            }
+
+            .header-chips-row {
+                gap: .15rem;
+            }
+        }
+
+        /* Ensure smooth horizontal scrolling pointer/gesture usability: */
+        .header-chips-row,
+        .category-chip-scroll {
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            overscroll-behavior-x: contain;
+        }
 
         /* Top Section Grid */
         .main-top-grid {
@@ -334,6 +335,62 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 768px) {
+            .sticky-header .d-flex.align-items-center {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1em;
+            }
+
+            .navbar-brand img {
+                height: 64px;
+                width: 64px;
+                margin-bottom: 12px;
+            }
+
+            .search-container {
+                width: 100%;
+                margin: 12px 0;
+            }
+
+            .search-bar {
+                height: 44px;
+                font-size: 15px;
+            }
+
+            .header-auth-btn {
+                width: 100%;
+                text-align: center;
+                margin: 8px 0 0 0;
+                padding: 10px;
+                font-size: 0.95em;
+            }
+
+            .header-auth-btn.cta {
+                margin-top: 8px;
+            }
+
+            .category-chip-scroll {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding: 8px 0;
+            }
+
+            .header-chips-row {
+                display: inline-flex;
+                flex-wrap: nowrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sticky-header .d-flex.align-items-center {
+                justify-content: center;
+            }
+
+
+        }
+
 
         /* Hero Cards */
         .hero-big-card {
@@ -784,6 +841,7 @@
             .hero-big-card {
                 min-height: 280px;
             }
+
         }
 
         @media (max-width: 768px) {
@@ -1022,6 +1080,21 @@
             margin-right: 6px;
             font-size: 0.9rem;
         }
+
+        @media (max-width: 767px) {
+            #logo-div {
+                display: none !important;
+            }
+
+            #logo-div1 {
+                display: flex !important;
+            }
+
+
+            #btn-contact {
+                display: none !important;
+            }
+        }
     </style>
     <!-- Favicon icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -1034,6 +1107,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="favicons/android-chrome-512x512.png">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -1049,18 +1123,27 @@
         <div class="d-flex flex-column">
             <div class="d-flex align-items-center py-3 px-2">
                 <!-- Logo: text, not image -->
-                <a class="navbar-brand d-flex align-items-center" href="index.php">
+                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
                 </a>
                 <!-- Search Bar -->
-                <div class="search-container ms-auto">
-                    <i class="bi bi-search search-icon" style="margin-left: -110px;"></i>
-                    <input class="search-bar" type="search" style="margin-left: -110px;"
+
+                <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
+                    <img src="images/logo.svg" alt="Gadget Grid logo" />
+
+                </a>
+                <div class="search-container">
+                    <i class="bi bi-search search-icon"></i>
+                    <input class="search-bar" type="search"
                         placeholder="Search for gadgets, reviews, and tech news..." />
                 </div>
-                <button class="header-auth-btn">Contact Us</button>
-                <button class="header-auth-btn cta">Subscribe</button>
+
+                <div class="d-flex flex-wrap gap-2 justify-content-end mt-2 mt-md-0" id="btn-contact">
+                    <button class="header-auth-btn">Contact Us</button>
+                    <button class="header-auth-btn cta">Subscribe</button>
+                </div>
+
             </div>
             <!-- Categories row -->
             <div class="category-chip-scroll">
@@ -1202,6 +1285,8 @@
         totalAllPosts = 0,
         featuredOffset = 0, trendingOffset = 0, allOffset = 0,
         sectionViewMode = "all";
+
+    let isCatLoaded = false; // To track if categories are loaded
     currentSearch = '';
     let searchResultsPosts = [];
     let currentCategoryId = "all";
@@ -1263,6 +1348,10 @@
                 }
 
                 renderTagAboveMain();
+                /* if (!isCatLoaded) {
+                     renderCategoryChips();
+                     isCatLoaded = true;
+                 }*/
                 renderCategoryChips();
                 renderHeroCardOrCategoryBanner();
                 renderNowTrendingSidebar();
@@ -1382,36 +1471,110 @@
             });
         }
 
+        /* function renderCategoryChips() {
+             let chips = `<span class="category-chip" data-category-id="all">All Categories</span>`;
+             allCategories.forEach(c =>
+                 chips += `<span class="category-chip" data-category-id="${c.id}">${c.category_name}</span>`
+             );
+             $("#categoryChips").html(chips);
+ 
+             $(".category-chip").removeClass("active");
+             $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
+ 
+             $(".category-chip").off("click").on("click", function (e) {
+                 // REMOVE/HIDE post detail section when selecting category!
+                 $("#postDetailSection").remove();
+ 
+                 let $this = $(this);
+                 let offset = $this.offset();
+                 let x = e.pageX - offset.left;
+                 let y = e.pageY - offset.top;
+ 
+                 $this.css('--ripple-x', `${x}px`);
+                 $this.css('--ripple-y', `${y}px`);
+                 $this.addClass('ripple');
+ 
+                 setTimeout(() => $this.removeClass('ripple'), 400);
+ 
+                 let catid = $this.data("category-id").toString();
+                 currentCategoryId = catid;
+                 $(".category-chip").removeClass("active");
+                 $this.addClass("active");
+ 
+                 sectionViewMode = 'all';
+                 featuredOffset = trendingOffset = allOffset = 0;
+                 featuredPosts = [];
+                 trendingPosts = [];
+                 allLoadedPosts = [];
+                 searchResultsPosts = [];
+                 currentSearch = '';
+                 $(".search-bar").val("");
+                 fetchAndRenderAll();
+             });
+         }*/
         function renderCategoryChips() {
-            let chips = `<span class="category-chip" data-category-id="all">All Categories</span>`;
-            allCategories.forEach(c =>
-                chips += `<span class="category-chip" data-category-id="${c.id}">${c.category_name}</span>`
-            );
+
+            console.log("Rendering category chips with currentCategoryId:", currentCategoryId);
+
+
+            const categoryIcons = {
+                "all": "apps",
+                "technology": "swap_vert",
+                "health": "assignment",
+                "smart-home": "home",
+                "audio": "music_note",
+                "gaming": "widgets",
+                "mobile-accessories": "smartphone",
+                "smartphones": "bookmark",
+                "wearables": "watch",
+                "news": "notes"
+            };
+
+            let chips = `<span class="category-chip" id="all" data-category-id="all">
+        <span class="cat-icon material-icons" >${categoryIcons["all"]}</span>
+        All 
+    </span>`;
+
+
+
+
+
+            allCategories.forEach(c => {
+                let key = c.category_name.toString().toLowerCase().replace(/\s+/g, '-');
+                let icon = categoryIcons[key] || "label";
+                chips += `<span class="category-chip" data-category-id="${c.id}">
+            <span class="cat-icon material-icons">${icon}</span>
+            ${c.category_name}
+        </span>`;
+            });
             $("#categoryChips").html(chips);
 
+            // Remove ALL active first (prevents multi-active bug)
             $(".category-chip").removeClass("active");
+
+
+            if (currentCategoryId === 'all') {
+                console.log("Setting active category to 'all'", currentCategoryId);
+                $(`.category-chip[data-category-id='${currentCategoryId}']`).remove("active");
+            }
+
+
+
             $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
 
+            // Button click
             $(".category-chip").off("click").on("click", function (e) {
-                // REMOVE/HIDE post detail section when selecting category!
-                $("#postDetailSection").remove();
 
-                let $this = $(this);
-                let offset = $this.offset();
-                let x = e.pageX - offset.left;
-                let y = e.pageY - offset.top;
-
-                $this.css('--ripple-x', `${x}px`);
-                $this.css('--ripple-y', `${y}px`);
-                $this.addClass('ripple');
-
-                setTimeout(() => $this.removeClass('ripple'), 400);
-
-                let catid = $this.data("category-id").toString();
-                currentCategoryId = catid;
                 $(".category-chip").removeClass("active");
-                $this.addClass("active");
+                $(this).addClass("active");
+                let newId = $(this).data("category-id").toString();
+                currentCategoryId = newId;
 
+                // Optional: scroll into view
+                this.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+
+                // Your logic here
+                $("#postDetailSection").remove();
                 sectionViewMode = 'all';
                 featuredOffset = trendingOffset = allOffset = 0;
                 featuredPosts = [];
@@ -1421,16 +1584,21 @@
                 currentSearch = '';
                 $(".search-bar").val("");
                 fetchAndRenderAll();
+
             });
+
         }
 
         function getActiveCategoryId() {
-            return ($(".category-chip.active").data("category-id") || "all").toString();
+            // return ($(".category-chip.active").data("category-id") || "all").toString();
+            return currentCategoryId;
         }
         function getActiveCategory() {
-            const catId = getActiveCategoryId();
-            if (catId === 'all') return null;
-            return allCategories.find(c => c.id == catId) || null;
+            /* const catId = getActiveCategoryId();
+             console.log("Active Category ID:", catId);
+             if (catId === 'all') return null;
+             return allCategories.find(c => c.id == catId) || null;*/
+            return allCategories.find(c => c.id.toString() === currentCategoryId) ?? null;
         }
 
         // SEARCH
