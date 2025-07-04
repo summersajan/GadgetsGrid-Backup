@@ -81,7 +81,7 @@
 
 
         .sticky-header {
-            background: #fff;
+            background: #f8f9fa;
             padding: 0;
             position: sticky;
             top: 0;
@@ -1120,38 +1120,42 @@
 
 <!-- Header -->
 <nav class="sticky-header">
+    <div class="container-lg">
 
 
-    <div class="d-flex flex-column">
-        <div class="d-flex align-items-center py-3 px-2" style="background : #fafafb">
-            <!-- Logo: text, not image -->
-            <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php" style="margin-left: 20px;">
-                <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
-            </a>
-            <!-- Search Bar -->
 
-            <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
-                <img src="images/logo.svg" alt="Gadget Grid logo" />
+        <div class="d-flex flex-column">
+            <div class="d-flex align-items-center py-3 px-2" style="background : #fafafb">
+                <!-- Logo: text, not image -->
+                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php"
+                    style="margin-left: 20px;">
+                    <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
+                </a>
+                <!-- Search Bar -->
 
-            </a>
-            <div class="search-container">
-                <i class="bi bi-search search-icon"></i>
-                <input class="search-bar" type="search" placeholder="Search for gadgets, reviews, and tech news..." />
+                <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
+                    <img src="images/logo.svg" alt="Gadget Grid logo" />
+
+                </a>
+                <div class="search-container">
+                    <i class="bi bi-search search-icon"></i>
+                    <input class="search-bar" type="search"
+                        placeholder="Search for gadgets, reviews, and tech news..." />
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 justify-content-end mt-2 mt-md-0" id="btn-contact">
+                    <button class="header-auth-btn">Contact Us</button>
+                    <button class="header-auth-btn cta">Subscribe</button>
+                </div>
+
             </div>
+            <!-- Categories row -->
 
-            <div class="d-flex flex-wrap gap-2 justify-content-end mt-2 mt-md-0" id="btn-contact">
-                <button class="header-auth-btn">Contact Us</button>
-                <button class="header-auth-btn cta">Subscribe</button>
+            <div class="category-chip-scroll">
+                <div class="header-chips-row mt-0" id="categoryChips"></div>
             </div>
 
         </div>
-        <!-- Categories row -->
-
-        <div class="category-chip-scroll">
-            <div class="header-chips-row mt-0" id="categoryChips"></div>
-        </div>
-
-
     </div>
 
 </nav>
