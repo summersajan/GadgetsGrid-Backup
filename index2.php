@@ -58,20 +58,21 @@
       --br: 16px;
       /* Slightly tighter border radius */
       --transition: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
       --chips: #e11d48;
 
       --chips-light: #fef2f2;
     }
 
     body {
-      background: #fff;
+
 
       color: var(--dark);
       /* font-family: "Outfit", sans-serif; */
       font-family: "Urbanist", sans-serif;
       /*font-family: "DM Sans", sans-serif;*/
       line-height: 1.6;
-      background: #fff;
+      background: #f8f9fa;
       border-radius: 12px;
       box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
       border: 1px solid #eee;
@@ -193,7 +194,8 @@
       overflow-y: hidden;
       align-items: stretch;
       gap: .5rem;
-      border-bottom: 2.5px solid #f3f4f6;
+      border-bottom: 2px solid #f3f4f6;
+      border-top: 2px solid #f3f4f6;
       width: 100%;
       min-height: 53px;
       scrollbar-width: none;
@@ -213,21 +215,21 @@
       position: relative;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 5px;
       border-radius: 0;
       background: transparent;
       color: #374151;
-      padding: 0 24px;
+      padding: 0 18px;
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 350;
       margin: 0;
       border: none;
       border-bottom: 3px solid transparent;
+      border-top: 3px solid transparent;
       height: 53px;
       flex: 0 0 auto;
-      min-width: 80px;
-      max-width: 140px;
-      /* Avoids huge category names */
+      min-width: 60px;
+      max-width: 170px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -246,16 +248,16 @@
       align-items: center;
     }
 
-    .category-chip[data-category-id="all"] {
-      color: var(--chips);
-      background: linear-gradient(90deg, var(--chips-light) 70%, rgba(255, 255, 255, 0));
-      border-bottom: 3px solid var(--chips);
-      font-weight: bold;
-    }
+    /* .category-chip[data-category-id="all"] {
+            color: var(--chips);
+            background: linear-gradient(90deg, var(--chips-light) 70%, rgba(255, 255, 255, 0));
+            border-bottom: 3px solid var(--chips);
+            font-weight: bold;
+        }*/
 
-    .category-chip[data-category-id="all"] .cat-icon {
+    /*.category-chip[data-category-id="all"] .cat-icon {
       color: var(--chips);
-    }
+    }*/
 
     .category-chip.active,
     .category-chip:hover {
@@ -386,6 +388,7 @@
       .sticky-header .d-flex.align-items-center {
         justify-content: center;
       }
+
 
     }
 
@@ -839,6 +842,7 @@
       .hero-big-card {
         min-height: 280px;
       }
+
     }
 
     @media (max-width: 768px) {
@@ -1078,174 +1082,18 @@
       font-size: 0.9rem;
     }
 
-    .sticky-header {
-      background: #fff;
-      padding: 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-    }
-
-    .navbar-brand {
-      font-weight: 900;
-      font-size: 2rem;
-      letter-spacing: -1.2px;
-      color: #222;
-      display: flex;
-      align-items: center;
-      margin-right: 32px;
-    }
-
-    .navbar-brand img {
-      height: 68px;
-      width: 68px;
-      border-radius: 2px;
-      margin-right: 8px;
-      transition: transform 0.3s;
-    }
-
-    .search-container {
-      position: relative;
-      max-width: 540px;
-      width: 100%;
-      margin: 0 auto;
-      flex: 1 1 100%;
-    }
-
-    .search-bar {
-      border-radius: 24px;
-      border: 2px solid #e2e8f0;
-      background: #fff;
-      font-size: 17px;
-      padding: 12px 20px 12px 44px;
-      width: 100%;
-      height: 50px;
-      box-shadow: none;
-    }
-
-    .search-bar:focus {
-      border-color: #e3343a;
-      outline: none;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 18px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #969fa6;
-      font-size: 1.18em;
-    }
-
-    .header-auth-btn {
-      border-radius: 24px;
-      font-weight: 700;
-      font-size: 1em;
-      border: 2px solid #e3343a;
-      padding: 8px 24px;
-      background: transparent;
-      color: #e3343a;
-      transition: all 0.2s;
-    }
-
-    .header-auth-btn.cta {
-      background: #e3343a;
-      color: #fff;
-    }
-
-    .header-auth-btn.cta:hover {
-      background: #c5162a;
-      color: #fff;
-    }
-
-    .header-auth-btn:hover {
-      background: #e3343a14;
-    }
-
-    .hamburger-btn {
-      background: none;
-      border: none;
-      color: #222;
-      padding: 6px;
-    }
-
-    @media (min-width: 768px) {
-
-      .hamburger-btn,
-      .mobile-toggle-area {
+    @media (max-width: 767px) {
+      #logo-div {
         display: none !important;
       }
-    }
 
-    .mobile-toggle-area {
-      background-color: #fff;
-      border-top: 1px solid #eee;
-    }
-
-    .container-lg {
-      max-width: 1140px;
-      margin: 0 auto;
-      padding: 0 1rem;
-    }
-
-    .d-flex {
-      display: flex;
-    }
-
-    .flex-column {
-      flex-direction: column;
-    }
-
-    .align-items-center {
-      align-items: center;
-    }
-
-    .justify-content-end {
-      justify-content: flex-end;
-    }
-
-    .gap-2 {
-      gap: 0.5rem;
-    }
-
-    .mt-2 {
-      margin-top: 0.5rem;
-    }
-
-    .mt-3 {
-      margin-top: 1rem;
-    }
-
-    .pb-3 {
-      padding-bottom: 1rem;
-    }
-
-    .w-100 {
-      width: 100%;
-    }
-
-    .d-none {
-      display: none;
-    }
-
-    .d-md-flex {
-      display: none;
-    }
-
-    @media (min-width: 768px) {
-      .d-md-flex {
+      #logo-div1 {
         display: flex !important;
       }
-    }
 
-    .d-md-none {
-      display: block;
-    }
 
-    @media (min-width: 768px) {
-      .d-md-none {
-        display: none;
+      #btn-contact {
+        display: none !important;
       }
     }
   </style>
@@ -1272,59 +1120,41 @@
 
 <!-- Header -->
 <nav class="sticky-header">
-  <div class="container-lg">
-    <div class="d-flex flex-column">
-      <!-- Top Row -->
-      <div class="d-flex align-items-center py-3 px-2">
-        <!-- Logo: text, not image -->
-        <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php">
-          <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
-        </a>
-        <!-- Search Bar -->
-        <div class="search-container">
-          <i class="bi bi-search search-icon"></i>
-          <input class="search-bar" type="search" placeholder="Search for gadgets, reviews, and tech news..." />
-        </div>
 
-        <div class="d-flex flex-wrap gap-2 justify-content-end mt-2 mt-md-0">
-          <button class="header-auth-btn">Contact Us</button>
-          <button class="header-auth-btn cta">Subscribe</button>
-        </div>
-        <button class="hamburger-btn d-md-none ms-auto" type="button" id="hamburgerToggle">
-          <i class="bi bi-list" style="font-size: 1.8rem;"></i>
-        </button>
-      </div>
-      <!-- Categories row -->
-      <div class="category-chip-scroll">
-        <div class="header-chips-row mt-0" id="categoryChips"></div>
+  <div class="d-flex flex-column">
+    <div class="d-flex align-items-center py-3 px-2" style="background : #fafafb">
+      <!-- Logo: text, not image -->
+      <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php" style="margin-left: 20px;">
+        <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
+      </a>
+      <!-- Search Bar -->
+
+      <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
+        <img src="images/logo.svg" alt="Gadget Grid logo" />
+
+      </a>
+      <div class="search-container">
+        <i class="bi bi-search search-icon"></i>
+        <input class="search-bar" type="search" placeholder="Search for gadgets, reviews, and tech news..." />
       </div>
 
-      <!-- Mobile Menu Toggle Area -->
-      <div class="mobile-toggle-area d-md-none px-3 pb-3" id="mobileMenu" style="display: none;">
-        <!-- Mobile Logo -->
-        <a class="navbar-brand d-flex align-items-center mb-2" href="index.php">
-          <img src="images/logo.svg" alt="Gadget Grid logo" />
-
-        </a>
-
-        <!-- Mobile Search -->
-        <div class="search-container mb-3">
-          <i class="bi bi-search search-icon"></i>
-          <input class="search-bar" type="search" placeholder="Search for gadgets, reviews, tech news..." />
-        </div>
-
-        <!-- Mobile Buttons -->
-        <div class="d-flex flex-column gap-2">
-          <button class="header-auth-btn w-100">Contact Us</button>
-          <button class="header-auth-btn cta w-100">Subscribe</button>
-        </div>
+      <div class="d-flex flex-wrap gap-2 justify-content-end mt-2 mt-md-0" id="btn-contact">
+        <button class="header-auth-btn">Contact Us</button>
+        <button class="header-auth-btn cta">Subscribe</button>
       </div>
+
     </div>
+    <!-- Categories row -->
+
+    <div class="category-chip-scroll">
+      <div class="header-chips-row mt-0" id="categoryChips"></div>
+    </div>
+
+
   </div>
+
 </nav>
-
-
 
 
 <section class="top-section container-lg mt-4" id="top-section">
@@ -1457,6 +1287,8 @@
     totalAllPosts = 0,
     featuredOffset = 0, trendingOffset = 0, allOffset = 0,
     sectionViewMode = "all";
+
+  let isCatLoaded = false; // To track if categories are loaded
   currentSearch = '';
   let searchResultsPosts = [];
   let currentCategoryId = "all";
@@ -1518,6 +1350,10 @@
         }
 
         renderTagAboveMain();
+        /* if (!isCatLoaded) {
+             renderCategoryChips();
+             isCatLoaded = true;
+         }*/
         renderCategoryChips();
         renderHeroCardOrCategoryBanner();
         renderNowTrendingSidebar();
@@ -1679,6 +1515,10 @@
          });
      }*/
     function renderCategoryChips() {
+
+      console.log("Rendering category chips with currentCategoryId:", currentCategoryId);
+
+
       const categoryIcons = {
         "all": "apps",
         "technology": "swap_vert",
@@ -1692,10 +1532,15 @@
         "news": "notes"
       };
 
-      let chips = `<span class="category-chip" id="allId" data-category-id="all">
+      let chips = `<span class="category-chip" id="all" data-category-id="all">
         <span class="cat-icon material-icons" >${categoryIcons["all"]}</span>
         All 
     </span>`;
+
+
+
+
+
       allCategories.forEach(c => {
         let key = c.category_name.toString().toLowerCase().replace(/\s+/g, '-');
         let icon = categoryIcons[key] || "label";
@@ -1710,14 +1555,20 @@
       $(".category-chip").removeClass("active");
 
 
+      if (currentCategoryId === 'all') {
+        console.log("Setting active category to 'all'", currentCategoryId);
+        $(`.category-chip[data-category-id='${currentCategoryId}']`).remove("active");
+      }
+
+
 
       $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
 
       // Button click
       $(".category-chip").off("click").on("click", function (e) {
-        $(".category-chip").removeClass("active"); // Remove from all!
-        $(this).addClass("active"); // Add only to clicked
 
+        $(".category-chip").removeClass("active");
+        $(this).addClass("active");
         let newId = $(this).data("category-id").toString();
         currentCategoryId = newId;
 
@@ -1735,17 +1586,21 @@
         currentSearch = '';
         $(".search-bar").val("");
         fetchAndRenderAll();
+
       });
+
     }
 
     function getActiveCategoryId() {
-      return ($(".category-chip.active").data("category-id") || "all").toString();
+      // return ($(".category-chip.active").data("category-id") || "all").toString();
+      return currentCategoryId;
     }
     function getActiveCategory() {
-      const catId = getActiveCategoryId();
-      console.log("Active Category ID:", catId);
-      if (catId === 'all') return null;
-      return allCategories.find(c => c.id == catId) || null;
+      /* const catId = getActiveCategoryId();
+       console.log("Active Category ID:", catId);
+       if (catId === 'all') return null;
+       return allCategories.find(c => c.id == catId) || null;*/
+      return allCategories.find(c => c.id.toString() === currentCategoryId) ?? null;
     }
 
     // SEARCH
@@ -1934,7 +1789,13 @@
     }
     function renderAllPostsSection() {
       if (!allLoadedPosts.length) {
-        $("#allPostsSection").hide();
+        const noProductMessage = `
+      <div class="text-center py-5">
+        <h3 class="text-muted">No products found</h3>
+        <p class="text-secondary">Please try a different category or search term.</p>
+      </div>
+    `;
+        $("#allPostsSection").html(noProductMessage).show();
         return;
       }
       let title = (activeCategory ? (activeCategory.category_name + " Products") : (sectionViewMode === "search" ? "Search Results" : "All"));
