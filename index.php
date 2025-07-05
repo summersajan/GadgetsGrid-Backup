@@ -178,50 +178,60 @@
             background: #e3343a14;
         }
 
-        /* Layout */
-        .category-chip-scroll {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            background: #fff;
+        :root {
+            --chips: #fb3958;
+            /* Example primary color for active */
+            --text-muted: #6B7280;
+            /* Muted text/icon color */
         }
 
-        .header-chips-row {
+        .category-chip-scroll {
             display: flex;
-            flex-wrap: nowrap;
+            flex-direction: row;
+            align-items: center;
             overflow-x: auto;
-            overflow-y: hidden;
-            align-items: stretch;
-            gap: .5rem;
+            overflow-y: visible;
             border-bottom: 2px solid #f3f4f6;
             border-top: 2px solid #f3f4f6;
-            width: 100%;
-            min-height: 53px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-            background: #fff;
-        }
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            overscroll-behavior-x: contain;
 
-        .header-chips-row::-webkit-scrollbar {
-            display: none;
+            /* Hide scrollbars by default */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
         }
 
         .category-chip-scroll::-webkit-scrollbar {
             display: none;
+            /* Chrome, Safari, Opera */
         }
 
+        .header-chips-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+            width: max-content;
+            /* prevent chips wrapping on small containers */
+            flex-wrap: nowrap;
+            margin: 0;
+        }
+
+        /* Style for buttons/chips */
         .category-chip {
             position: relative;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             border-radius: 0;
             background: transparent;
             color: #374151;
-            padding: 0 24px;
+            padding: 0 22px;
             font-size: 15px;
-            font-weight: 300;
+            font-weight: 270;
             margin: 0;
             border: none;
             border-bottom: 3px solid transparent;
@@ -229,7 +239,7 @@
             height: 53px;
             flex: 0 0 auto;
             min-width: 60px;
-            max-width: 170px;
+            max-width: 190px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -247,17 +257,6 @@
             display: flex;
             align-items: center;
         }
-
-        /* .category-chip[data-category-id="all"] {
-            color: var(--chips);
-            background: linear-gradient(90deg, var(--chips-light) 70%, rgba(255, 255, 255, 0));
-            border-bottom: 3px solid var(--chips);
-            font-weight: bold;
-        }*/
-
-        /*.category-chip[data-category-id="all"] .cat-icon {
-      color: var(--chips);
-    }*/
 
         .category-chip.active,
         .category-chip:hover {
@@ -281,6 +280,7 @@
             display: none !important;
         }
 
+        /* Tablet breakpoint */
         @media (max-width: 900px) {
             .category-chip {
                 font-size: 14px;
@@ -294,8 +294,7 @@
             }
         }
 
-
-
+        /* Mobile: shrink chips, show bottom scrollbar visually */
         @media (max-width: 600px) {
             .category-chip {
                 font-size: 13px;
@@ -307,14 +306,41 @@
             .header-chips-row {
                 gap: .15rem;
             }
+
+            .category-chip-scroll {
+                scrollbar-width: thin;
+                /* Firefox */
+                scrollbar-color: #dedede #f9fafb;
+                /* Thumb/track */
+            }
+
+            .category-chip-scroll::-webkit-scrollbar {
+                display: block;
+                height: 6px;
+                /* Show thin bottom scrollbar */
+                background: #f9fafb;
+            }
+
+            .category-chip-scroll::-webkit-scrollbar-thumb {
+                background: #dedede;
+                border-radius: 3px;
+            }
+
+            .category-chip-scroll::-webkit-scrollbar-track {
+                background: #f9fafb;
+            }
         }
 
-        /* Ensure smooth horizontal scrolling pointer/gesture usability: */
-        .header-chips-row,
-        .category-chip-scroll {
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-x;
-            overscroll-behavior-x: contain;
+        @media (min-width: 1140px) {
+            .category-chip-scroll {
+                justify-content: center;
+            }
+
+            .header-chips-row {
+                width: auto;
+                margin: 0 auto;
+                justify-content: center;
+            }
         }
 
         /* Top Section Grid */
@@ -372,16 +398,7 @@
                 margin-top: 8px;
             }
 
-            .category-chip-scroll {
-                overflow-x: auto;
-                white-space: nowrap;
-                padding: 8px 0;
-            }
 
-            .header-chips-row {
-                display: inline-flex;
-                flex-wrap: nowrap;
-            }
         }
 
         @media (max-width: 768px) {
@@ -1151,14 +1168,22 @@
             </div>
             <!-- Categories row -->
 
-            <div class="category-chip-scroll">
-                <div class="header-chips-row mt-0" id="categoryChips"></div>
-            </div>
+
 
         </div>
     </div>
 
 </nav>
+<div class="category-chip-scroll" style=" border-bottom: 2px solid #f3f4f6; background:#fff;
+            border-top: 2px solid #f3f4f6;">
+
+    <div class="header-chips-row mt-0 justify-content-center" id="categoryChips">
+
+
+    </div>
+
+</div>
+
 
 
 <section class="top-section container-lg mt-4" id="top-section">
