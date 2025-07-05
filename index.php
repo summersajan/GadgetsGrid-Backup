@@ -1969,6 +1969,7 @@
             // Main image
             let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images?.[0] || pd.thumbnail}" alt="Main" />`;
 
+
             if (d.images && d.images.length > 1) {
                 gallery += `<div class="d-flex gallery-thumbs flex-wrap">`;
                 d.images.forEach((img, i) => {
