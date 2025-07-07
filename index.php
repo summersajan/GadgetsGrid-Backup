@@ -1024,7 +1024,7 @@
             overflow: hidden;
             transition: all 0.4s var(--transition);
             width: 300px;
-            height: 485px;
+            height: 490px;
             position: relative;
         }
 
