@@ -1008,23 +1008,13 @@
         }
 
         /* Product Cards */
-        /* .product-card {
-            border-radius: 12px;
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.05);
-            overflow: hidden;
-            transition: all 0.4s var(--transition);
-            height: 100%;
-            position: relative;
-        }*/
         .product-card {
             border-radius: 12px;
             background: #fff;
             box-shadow: 0 4px 12px rgba(30, 41, 59, 0.05);
             overflow: hidden;
             transition: all 0.4s var(--transition);
-            width: 300px;
-            height: 485px;
+            height: 100%;
             position: relative;
         }
 
@@ -1033,15 +1023,12 @@
             box-shadow: 0 12px 24px rgba(30, 41, 59, 0.1);
         }
 
-
-
         .product-card img {
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            height: 180px;
             object-fit: cover;
             transition: transform 0.4s var(--transition);
         }
-
 
         .product-card:hover img {
             transform: scale(1.03);
@@ -1124,26 +1111,6 @@
 
             #btn-contact {
                 display: none !important;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .product-card {
-                width: 100% !important;
-                min-width: 0 !important;
-                max-width: 100% !important;
-                margin-left: 0;
-                margin-right: 0;
-            }
-
-            .product-card img {
-                width: 100% !important;
-                min-width: 0;
-                height: auto;
-            }
-
-            .row.g-4 {
-                --bs-gutter-x: 0.5rem;
             }
         }
     </style>
@@ -1380,9 +1347,9 @@
                 featuredOffset: 0,
                 trendingOffset: 0,
                 allOffset: 0,
-                featuredLimit: 5,
-                trendingLimit: 5,
-                allLimit: 5,
+                featuredLimit: 4,
+                trendingLimit: 4,
+                allLimit: 4,
                 showSection: sectionViewMode,
                 categoryId: getActiveCategoryId(),
                 search: currentSearch
@@ -1429,9 +1396,9 @@
                 featuredOffset: 0,
                 trendingOffset: 0,
                 allOffset: 0,
-                featuredLimit: 6,
-                trendingLimit: 6,
-                allLimit: 6,
+                featuredLimit: 4,
+                trendingLimit: 4,
+                allLimit: 4,
                 showSection: sectionViewMode,
                 categoryId: getActiveCategoryId(),
                 search: currentSearch
@@ -1729,22 +1696,11 @@
                 </span>
                 <a href="javascript:void(0)" class="stretched-link"></a>
                 <style>
-                  #exclusiveLaunchContainer {
-    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 600px;
-    margin: 0;
-    padding: 0;
-    display: flex;              /* Optional: center content inside */
-    align-items: center;
-    justify-content: center;
-}
-
-
-                    
+                    #exclusiveLaunchContainer {
+                        background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
+                        background-size:cover;
+                        background-position:center;
+                    }
                 </style>
             `;
             } else {
@@ -1904,27 +1860,23 @@
         }
         function renderPostCard(post, i) {
             return `
-   <div class="col-12 col-sm-6 col-md-3 col-lg-3 product-row">
-        <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
-          
-           <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" alt="${(post.title || '').replace(/"/g, '&quot;')}" />
-           
-
-          <div class="p-3">
-            <div class="product-meta-row">
-              <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
+            <div class="col-12 col-sm-6 col-md-3 product-row">
+                <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                  <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" alt="${(post.title || '').replace(/"/g, '&quot;')}" />
+                  <div class="p-3">
+                    <div class="product-meta-row">
+                      <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
+                    </div>
+                    <h6 class="card-title">${post.title}</h6>
+                    ${post.tags ? `<div class="mb-1">
+                      ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+                    </div>` : ""}
+                    <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                  </div>
+                </div>
             </div>
-            <h6 class="card-title">${post.title}</h6>
-            ${post.tags ? `<div class="mb-1">
-              ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
-            </div>` : ""}
-            <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
-          </div>
-        </div>
-    </div>
-    `;
+            `;
         }
-
 
         function showProductDetail(postId) {
             $("#main-content").html('<div style="padding:4em;text-align:center;">Loading...</div>');
@@ -2015,34 +1967,16 @@
             let pd = d.post;
 
             // Main image
-            // let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images?.[0] || pd.thumbnail}" alt="Main" />`;
-
-            let gallery = `
-<div style="display: flex; justify-content: center;">
-  <div style="aspect-ratio: 1 / 1; width: 70%; overflow: hidden; background: #fff;" class="rounded">
-    <img id="mainImgView" 
-         class="main-img-view mb-3 w-100 h-100 rounded" 
-         src="${d.images?.[0] || pd.thumbnail}" 
-         alt="Main" />
-  </div>
-</div>
-`;
-
-
+            let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images?.[0] || pd.thumbnail}" alt="Main" />`;
 
 
             if (d.images && d.images.length > 1) {
-                gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2">`;
+                gallery += `<div class="d-flex gallery-thumbs flex-wrap">`;
                 d.images.forEach((img, i) => {
-                    gallery += `<img src="${img}" 
-                          class="thumb-img rounded${i === 0 ? ' active' : ''}" 
-                          data-img="${img}" 
-                          alt="image ${i}" 
-                          style="height: 70px; width: auto; object-fit: contain;" />`;
+                    gallery += `<img src="${img}" class="thumb-img${i === 0 ? ' active' : ''}" data-img="${img}" alt="image ${i}">`;
                 });
                 gallery += `</div>`;
             }
-
 
             // Badges
             let badges = '';

@@ -1665,13 +1665,7 @@
       if (activeCategory) {
         let image = activeCategory.category_image ? activeCategory.category_image : "category/default-category.jpg";
         let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08);">
-  <div style="aspect-ratio: 5 / 4; overflow: hidden; background: #fff;" class="rounded">
-  <img src="category/${image}" 
-       class="w-100 h-100 rounded" 
-       style="object-fit: contain; margin: auto;" 
-       alt="Category Image">
-</div>
-
+   <img src="category/${image}" style="width:100%; height:100%; margin:auto;">
     <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
         ${activeCategory.category_name}
     </div>
@@ -1699,11 +1693,22 @@
                 </span>
                 <a href="javascript:void(0)" class="stretched-link"></a>
                 <style>
-                    #exclusiveLaunchContainer {
-                        background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
-                        background-size:cover;
-                        background-position:center;
-                    }
+                  #exclusiveLaunchContainer {
+    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 600px;
+    margin: 0;
+    padding: 0;
+    display: flex;              /* Optional: center content inside */
+    align-items: center;
+    justify-content: center;
+}
+
+
+                    
                 </style>
             `;
       } else {
@@ -1866,9 +1871,10 @@
     <div class="col-12 col-sm-6 col-md-3 product-row">
         <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
           
-          <div style="aspect-ratio: 5 / 4; overflow: hidden; background: #fff;" class="rounded-top">
+          <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
             <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
                  alt="${(post.title || '').replace(/"/g, '&quot;')}" 
+               
                  class="w-100 h-100 object-fit-contain rounded-top" />
           </div>
 
@@ -1980,14 +1986,15 @@
       // let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images?.[0] || pd.thumbnail}" alt="Main" />`;
 
       let gallery = `
-<div style="aspect-ratio: 5 / 4; overflow: hidden; background: #fff;" class="rounded">
+<div style="aspect-ratio: 1 / 1; background: #fff; overflow: hidden;" class="rounded mx-auto mb-3">
   <img id="mainImgView" 
-       class="main-img-view mb-3 w-100 h-100 rounded" 
+       class="main-img-view w-100 h-100 rounded" 
        style="object-fit: contain;" 
        src="${d.images?.[0] || pd.thumbnail}" 
        alt="Main" />
 </div>
 `;
+
 
 
 
