@@ -1024,7 +1024,7 @@
             overflow: hidden;
             transition: all 0.4s var(--transition);
             width: 300px;
-            height: 490px;
+            height: 475px;
             position: relative;
         }
 
@@ -1062,6 +1062,7 @@
             color: var(--main-dark);
             font-weight: 600;
             font-size: 0.8rem;
+            margin-top: -14px;
         }
 
         .product-card .card-title {
@@ -1144,6 +1145,75 @@
 
             .row.g-4 {
                 --bs-gutter-x: 0.5rem;
+            }
+        }
+
+        .text-truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 1024px) {
+            .product-card {
+                width: 240px;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .product-card img {
+                width: 100%;
+                height: auto;
+            }
+
+            .main-top-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .search-container {
+                max-width: 80%;
+                margin: 16px auto;
+            }
+
+            .hero-big-card,
+            .side-card {
+                min-height: 400px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .navbar-brand img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .header-auth-btn {
+                padding: 10px 18px;
+                font-size: 0.95rem;
+            }
+
+            .now-trending-card {
+                min-height: 280px;
+                padding: 20px;
+            }
+
+            .detail-card {
+                padding: 24px;
+            }
+
+            .main-img-view {
+                height: 280px;
+            }
+
+            .thumb-img {
+                width: 90px;
+                height: 64px;
             }
         }
     </style>
@@ -1278,7 +1348,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-4 mb-4">
-                <a class="navbar-brand d-flex align-items-center" href="index.php">
+                <a class="navbar-brand d-flex align-items-center" href="index.php" style="margin-left: 20px;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
 
                 </a>
@@ -1286,30 +1356,29 @@
                 color: var(--text-muted);
                 font-size: 0.95rem;
                 line-height: 1.6;
+                margin-left: 20px;
               ">
                     Discovering and curating the most innovative gadgets and tech
                     products from around the world.
                 </p>
             </div>
-            <div class="col-md-4 mb-4">
-                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark)">
+            <div class="col-md-4 mb-4"
+                style="margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark);">
                     Quick Links
                 </h6>
-                <div class="footer-links">
-                    <!-- <a href="#">About Us</a>
-                        <a href="support@gadgetsgrid.com">Contact</a>
-                        <a href="#">Advertise</a>
-                        <a href="#">FAQ</a> -->
-                    <a href="privacy.php">Privacy Policy</a>
-                    <a href="terms.php">Terms</a>
-
+                <div class="footer-links" style="display: flex; flex-direction: column; text-align: left;">
+                    <a href="privacy.php" style="text-decoration: none; color: inherit;">Privacy Policy</a>
+                    <a href="terms.php" style="text-decoration: none; color: inherit;">Terms</a>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark)">
+
+
+            <div class="col-md-4 mb-4" style="margin-left: auto; text-align: right;">
+                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark);">
                     Connect
                 </h6>
-                <div class="footer-social">
+                <div class="footer-social" style="display: flex; justify-content: flex-end; gap: 10px;">
                     <a href="#"><i class="bi bi-twitter"></i></a>
                     <a href="#"><i class="bi bi-facebook"></i></a>
                     <a href="#"><i class="bi bi-instagram"></i></a>
@@ -1317,6 +1386,7 @@
                     <a href="#"><i class="bi bi-youtube"></i></a>
                 </div>
             </div>
+
         </div>
 
         <div class="footer-divider"></div>
@@ -1914,7 +1984,8 @@
             <div class="product-meta-row">
               <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
             </div>
-            <h6 class="card-title">${post.title}</h6>
+           <h6 class="card-title text-truncate-2">${post.title}</h6>
+
             ${post.tags ? `<div class="mb-1">
               ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
             </div>` : ""}
@@ -2019,7 +2090,7 @@
 
             let gallery = `
 <div style="display: flex; justify-content: center;">
-  <div style="aspect-ratio: 1 / 1; width: 70%; overflow: hidden; background: #fff;" class="rounded">
+  <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
     <img id="mainImgView" 
          class="main-img-view mb-3 w-100 h-100 rounded" 
          src="${d.images?.[0] || pd.thumbnail}" 
@@ -2032,7 +2103,7 @@
 
 
             if (d.images && d.images.length > 1) {
-                gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2">`;
+                gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2" style="margin-left:12px;">`;
                 d.images.forEach((img, i) => {
                     gallery += `<img src="${img}" 
                           class="thumb-img rounded${i === 0 ? ' active' : ''}" 
@@ -2126,11 +2197,14 @@
             } else {
                 posts.forEach((post, i) => {
                     html += `
-                <div class="col-12 col-sm-6 col-md-3 product-row">
-                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                <div class="col-12 col-sm-6 col-md-3 col-lg-3 product-row">
+                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer; height:445px;">
                         <img src="${post.thumbnail || "images/default.jpg"}" alt="">
                         <div class="p-3">
-                            <h6 class="card-title">${post.title}</h6>
+                            <h6 class="card-title text-truncate-2">${post.title}</h6>
+                             ${post.tags ? `<div class="mb-1">
+              ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+            </div>` : ""}
                             <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
                         </div>
                     </div>
