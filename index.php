@@ -1176,13 +1176,12 @@
         <div class="d-flex flex-column">
             <div class="d-flex align-items-center py-3 px-2" style="background : #fafafb">
                 <!-- Logo: text, not image -->
-                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php"
-                    style="margin-left: 20px;">
+                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="/" style="margin-left: 20px;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
                 </a>
                 <!-- Search Bar -->
 
-                <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
+                <a class="align-items-center" id="logo-div1" href="/" style="display:none;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" />
 
                 </a>
@@ -1285,7 +1284,7 @@
             <!-- Left Column -->
             <div class="col-12 col-md-4 mb-4 text-center text-md-start">
                 <a class="navbar-brand d-flex align-items-center justify-content-center justify-content-md-start"
-                    href="index.php">
+                    href="/">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height: 68px;" />
                 </a>
                 <p style="
