@@ -371,8 +371,8 @@
             }
 
             .navbar-brand img {
-                height: 64px;
-                width: 64px;
+                height: 158px;
+                width: 158px;
                 margin-bottom: 12px;
             }
 
