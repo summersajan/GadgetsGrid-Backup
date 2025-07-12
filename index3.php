@@ -371,8 +371,8 @@
             }
 
             .navbar-brand img {
-                height: 64px;
-                width: 64px;
+                height: 158px;
+                width: 158px;
                 margin-bottom: 12px;
             }
 
@@ -1008,23 +1008,13 @@
         }
 
         /* Product Cards */
-        /* .product-card {
-            border-radius: 12px;
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(30, 41, 59, 0.05);
-            overflow: hidden;
-            transition: all 0.4s var(--transition);
-            height: 100%;
-            position: relative;
-        }*/
         .product-card {
             border-radius: 12px;
             background: #fff;
             box-shadow: 0 4px 12px rgba(30, 41, 59, 0.05);
             overflow: hidden;
             transition: all 0.4s var(--transition);
-            width: 300px;
-            height: 475px;
+            height: 100%;
             position: relative;
         }
 
@@ -1033,15 +1023,12 @@
             box-shadow: 0 12px 24px rgba(30, 41, 59, 0.1);
         }
 
-
-
         .product-card img {
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            height: 180px;
             object-fit: cover;
             transition: transform 0.4s var(--transition);
         }
-
 
         .product-card:hover img {
             transform: scale(1.03);
@@ -1054,6 +1041,9 @@
             gap: 8px;
             flex-wrap: wrap;
         }
+
+
+
 
         .product-meta-row .meta {
             background: #f1f5f9;
@@ -1128,26 +1118,6 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .product-card {
-                width: 100% !important;
-                min-width: 0 !important;
-                max-width: 100% !important;
-                margin-left: 0;
-                margin-right: 0;
-            }
-
-            .product-card img {
-                width: 100% !important;
-                min-width: 0;
-                height: auto;
-            }
-
-            .row.g-4 {
-                --bs-gutter-x: 0.5rem;
-            }
-        }
-
         .text-truncate-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -1156,120 +1126,23 @@
             text-overflow: ellipsis;
         }
 
-        @media screen and (min-width: 768px) and (max-width: 1024px) {
-            .product-card {
-                width: 240px;
-                height: auto;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .product-card img {
-                width: 100%;
-                height: auto;
-            }
-
-            .main-top-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-
-            .search-container {
-                max-width: 80%;
-                margin: 16px auto;
-            }
-
-            .hero-big-card,
-            .side-card {
-                min-height: 400px;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .navbar-brand img {
-                width: 100px;
-                height: 100px;
-            }
-
-            .header-auth-btn {
-                padding: 10px 18px;
-                font-size: 0.95rem;
-            }
-
-            .now-trending-card {
-                min-height: 280px;
-                padding: 20px;
-            }
-
-            .detail-card {
-                padding: 24px;
-            }
-
-            .main-img-view {
-                height: 280px;
-            }
-
-            .thumb-img {
-                width: 90px;
-                height: 64px;
-            }
-        }
-
-        @media screen and (min-width: 768px) and (max-width: 1024px) {
-            .product-card {
-                width: 100%;
-                max-width: 300px;
-                height: auto;
-                margin: 10px auto;
-            }
-
-            .product-card img {
-                width: 100%;
-                height: auto;
-            }
-
-            .row {
-                display: flex;
-                flex-wrap: wrap;
+        @media (max-width: 767px) {
+            .footer-links {
+                align-items: center;
                 justify-content: center;
-                gap: 16px;
             }
 
-            .product-meta-row .meta {
-                margin-top: 4px;
-                /* fix overlap from -14px */
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .row,
-            .row.g-4 {
-                gap: 10px;
-                padding: 0 3vw;
+            .footer-social {
+                justify-content: center !important;
             }
 
-            .product-card {
-                width: 100% !important;
-                max-width: 100% !important;
-                min-width: 0 !important;
-                height: auto !important;
-                margin: 0 0 18px 0 !important;
-                box-sizing: border-box;
+            .footer-social a {
+                font-size: 1.4rem;
             }
 
-            .product-card img {
-                width: 100% !important;
-                min-width: 0;
-                height: auto !important;
-                max-height: 190px;
-            }
-
-            .product-meta-row {
-                font-size: 0.84rem;
-                margin: 10px 0 3px 0;
+            footer {
+                padding: 32px 16px;
+                text-align: center;
             }
         }
     </style>
@@ -1303,13 +1176,12 @@
         <div class="d-flex flex-column">
             <div class="d-flex align-items-center py-3 px-2" style="background : #fafafb">
                 <!-- Logo: text, not image -->
-                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php"
-                    style="margin-left: 20px;">
+                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="/" style="margin-left: 20px;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
                 </a>
                 <!-- Search Bar -->
 
-                <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
+                <a class="align-items-center" id="logo-div1" href="/" style="display:none;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" />
 
                 </a>
@@ -1400,63 +1272,98 @@
 </div>
 
 <!-- Footer -->
-<footer>
+<footer style="
+    margin-top: 80px;
+    background: #fff;
+    border-top: 1px solid #f1f5f9;
+    color: var(--dark);
+    padding: 48px 0 24px;
+">
     <div class="container-lg">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <a class="navbar-brand d-flex align-items-center" href="index.php" style="margin-left: 20px;">
-                    <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
-
+            <!-- Left Column -->
+            <div class="col-12 col-md-4 mb-4 text-center text-md-start">
+                <a class="navbar-brand d-flex align-items-center justify-content-center justify-content-md-start"
+                    href="/">
+                    <img src="images/logo.svg" alt="Gadget Grid logo" style="height: 68px;" />
                 </a>
                 <p style="
-                color: var(--text-muted);
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin-left: 20px;
-              ">
+                    color: var(--text-muted);
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    margin-top: 16px;
+                ">
                     Discovering and curating the most innovative gadgets and tech
                     products from around the world.
                 </p>
             </div>
-            <div class="col-md-4 mb-4"
-                style="margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+
+            <!-- Center Column -->
+            <div class="col-12 col-md-4 mb-4 text-center">
                 <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark);">
                     Quick Links
                 </h6>
-                <div class="footer-links" style="display: flex; flex-direction: column; text-align: left;">
-                    <a href="privacy.php" style="text-decoration: none; color: inherit;">Privacy Policy</a>
-                    <a href="terms.php" style="text-decoration: none; color: inherit;">Terms</a>
+                <div class="footer-links" style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    text-align: center;
+                ">
+                    <a href="privacy.php"
+                        style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Privacy
+                        Policy</a>
+                    <a href="terms.php"
+                        style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Terms</a>
                 </div>
             </div>
 
-
-            <div class="col-md-4 mb-4" style="margin-left: auto; text-align: right;">
+            <!-- Right Column -->
+            <div class="col-12 col-md-4 mb-4 text-center text-md-end">
                 <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark);">
                     Connect
                 </h6>
-                <div class="footer-social" style="display: flex; justify-content: flex-end; gap: 10px;">
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-pinterest"></i></a>
-                    <a href="#"><i class="bi bi-youtube"></i></a>
+                <div class="footer-social" style="
+                    display: flex;
+                    justify-content: center;
+                    justify-content: flex-end;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                ">
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-twitter"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-facebook"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-pinterest"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-youtube"></i></a>
                 </div>
             </div>
-
         </div>
 
-        <div class="footer-divider"></div>
+        <div class="footer-divider" style="border-top: 1px solid #f1f5f9; margin: 24px 0;"></div>
 
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <div class="footer-copyright mb-3 mb-md-0">
+        <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+            <div class="footer-copyright mb-3 mb-md-0" style="color: #94a3b8; font-size: 0.9rem;">
                 &copy; 2025 Gadget Grid. All rights reserved.
             </div>
-            <div style="color: #94a3b8; font-size: 0.9rem">
-                Made with <span class="footer-heart">♥</span> by Gadget Grid Team
+            <div style="color: #94a3b8; font-size: 0.9rem;">
+                Made with <span class="footer-heart"
+                    style="color: #f43f5e; font-size: 1.1rem; vertical-align: middle; margin: 0 4px;">♥</span> by Gadget
+                Grid Team
             </div>
         </div>
     </div>
 </footer>
+
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -1483,6 +1390,7 @@
     let currentCategoryId = "all";
     let currentGridPosts = []; // For grid/back detail logic
 
+    let categoryName = "All Gadgets"; // Default category name
     // _UTIL:_
     function escapeHtml(s) {
         return (s || "").replace(/[<>"'&]/g, c => ({
@@ -1826,16 +1734,25 @@
             $("#top-section").show();
             if (activeCategory) {
                 let image = activeCategory.category_image ? activeCategory.category_image : "category/default-category.jpg";
-                let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08);">
-   <img src="category/${image}" style="width:100%; height:100%; margin:auto;">
+                /*  let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08); ">
+     <img src="category/${image}" style="width:100%; height:100%; margin:auto; ">
+      <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
+          ${activeCategory.category_name}
+      </div>
+  </div>`;*/
+
+                let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08); ">
+   <img src="category/${image}" style="width:100%; height:100%; margin:auto; ">
     <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
         ${activeCategory.category_name}
     </div>
 </div>`;
 
+
                 $("#exclusiveLaunchContainer").hide();
                 $(".now-trending-card").hide();
-                $("#categoryImage").show().html(html);
+                //  $("#categoryImage").show().html(html);
+
             } else {
                 renderHeroCard();
                 $("#exclusiveLaunchContainer").show();
@@ -2033,15 +1950,19 @@
     <div class="col-12 col-sm-6 col-md-3 product-row">
         <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
           
-           <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" alt="${(post.title || '').replace(/"/g, '&quot;')}" />
-           
+          <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+            <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
+                 alt="${(post.title || '').replace(/"/g, '&quot;')}" 
+               
+                 class="w-100 h-100 object-fit-contain rounded-top" />
+          </div>
 
           <div class="p-3">
+          
             <div class="product-meta-row">
               <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
             </div>
-           <h6 class="card-title text-truncate-2">${post.title}</h6>
-
+            <h6 class="card-title text-truncate-2">${post.title}</h6>
             ${post.tags ? `<div class="mb-1">
               ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
             </div>` : ""}
@@ -2060,6 +1981,7 @@
             $("#allPostsSection").hide();
             $("#top-section").hide();
             $("#productsGridSection").show();
+
             $.post('ajax/post_api.php', { action: 'post', id: postId }, function (resp) {
                 if (resp && resp.post) {
                     let detailHtml = `<div id="postDetailSection" >`;
@@ -2079,65 +2001,7 @@
             }, 'json');
         }
 
-        /*function renderPostDetailHtml(d) {
-          let pd = d.post;
-          let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images && d.images.length ? d.images[0] : pd.thumbnail}" alt="Main" />`;
-     
-     
-     
-          if (d.images && d.images.length > 1) {
-            gallery += `<div class="d-flex gallery-thumbs flex-wrap">`;
-            d.images.forEach((img, i) => {
-              gallery += `<img src="${img}" class="thumb-img${i == 0 ? ' active' : ''}" data-img="${img}" alt="image ${i}">`;
-            });
-            gallery += `</div>`;
-          }
-          let badges = '';
-          if (pd.category_name) badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
-          if (pd.is_featured == 1) badges += `<span class="badge bg-warning-subtle text-warning-emphasis me-2">Featured</span>`;
-          if (pd.is_trending == 1) badges += `<span class="badge bg-danger-subtle text-danger me-2">Trending</span>`;
-          if (pd.status == 'draft') badges += `<span class="badge bg-secondary">Draft</span>`;
-          let links = '';
-          (d.product_links || []).forEach(link => {
-            links += `<a class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2"
-                        href="${link.product_link}" target="_blank" rel="nofollow noopener">
-                        <i class="bi bi-cart-check me-2"></i>
-                        ${link.price !== null && link.price !== "" ? 'Get it for <span class="fw-bold ms-1 me-2">$' + parseFloat(link.price).toFixed(2) + '</span>' : 'Get this Product'}
-                </a>`;
-          });
-     
-          let prices = '';
-          if (pd.price || pd.old_price) {
-            prices += pd.old_price ? `<span class="old-price me-2 text-decoration-line-through">$${parseFloat(pd.old_price).toFixed(2)}</span>` : '';
-            prices += pd.price ? `<span class="fw-bold text-warning-emphasis">$${parseFloat(pd.price).toFixed(2)}</span>` : '';
-            if (pd.discount) prices += `<span class="discount-badge ms-2">${pd.discount} OFF</span>`;
-          }
-          let meta = `<span><i class="bi bi-clock"></i> ${pd.created_at.substr(0, 10)}</span>`;
-          if (pd.updated_at && pd.updated_at != pd.created_at)
-            meta += `<span class="ms-2">Updated ${pd.updated_at.substr(0, 10)}</span>`;
-          let html = `
-            <div class="detail-card row gx-5 gy-4" style="width:100%;">
-                <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
-                <div class="col-12 col-md-6">
-                    <div class="card-title mb-3">${pd.title}</div>
-                    <div class="d-flex mb-2 align-items-center">${badges}</div>
-                    <div class="mb-3 meta-wrap text-muted small">${meta}</div>
-                    ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
-                    ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
-                    ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
-                    ${links}
-                </div>
-            </div>
-            `;
-          setTimeout(() => {
-            $('.thumb-img').on('click', function () {
-              $('.thumb-img').removeClass('active');
-              $(this).addClass('active');
-              $('#mainImgView').attr('src', $(this).attr('data-img'));
-            });
-          }, 1);
-          return html;
-        }*/
+
         function renderPostDetailHtml(d) {
             let pd = d.post;
 
@@ -2157,7 +2021,6 @@
 
 
 
-
             if (d.images && d.images.length > 1) {
                 gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2" style="margin-left:12px;">`;
                 d.images.forEach((img, i) => {
@@ -2170,7 +2033,7 @@
                 gallery += `</div>`;
             }
 
-
+            categoryName = pd.category_name || "All Gadgets";
             // Badges
             let badges = '';
             if (pd.category_name) badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
@@ -2246,6 +2109,9 @@
             }, 'json');
         }
         function renderRelatedProductsSection(posts) {
+
+            console.log('Rendering related products:', posts);
+
             let html = `<h3 class="section-title">Related Products</h3>
         <div class="row g-4">`;
             if (!posts.length) {
@@ -2254,10 +2120,21 @@
                 posts.forEach((post, i) => {
                     html += `
                 <div class="col-12 col-sm-6 col-md-3 product-row">
-                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer; height:445px;">
-                        <img src="${post.thumbnail || "images/default.jpg"}" alt="">
+                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                   
+                  <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+            <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
+                 alt="${(post.title || '').replace(/"/g, '&quot;')}" 
+               
+                 class="w-100 h-100 object-fit-contain rounded-top" />
+          </div>
+
+
                         <div class="p-3">
-                            <h6 class="card-title text-truncate-2">${post.title}</h6>
+                          <div class="product-meta-row">
+              <span class="meta" style="background:#e8f1fd;color:#5786f2">${categoryName || ''}</span>
+            </div>
+ <h6 class="card-title text-truncate-2">${post.title}</h6>
                              ${post.tags ? `<div class="mb-1">
               ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
             </div>` : ""}

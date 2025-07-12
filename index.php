@@ -1369,7 +1369,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 
-
 <script>
     let allCategories = [],
         featuredPosts = [],
@@ -1391,6 +1390,10 @@
     let currentGridPosts = []; // For grid/back detail logic
 
     let categoryName = "All Gadgets"; // Default category name
+
+    // ---- COMMON CATEGORY COMBO ----
+    let commonCategoryPosts = [];
+
     // _UTIL:_
     function escapeHtml(s) {
         return (s || "").replace(/[<>"'&]/g, c => ({
@@ -1422,7 +1425,6 @@
                 search: currentSearch
             }, function (res) {
                 let data = typeof res === "string" ? JSON.parse(res) : res;
-
                 allCategories = data.categories || [];
                 heroPost = data.hero || null;
                 featuredPosts = data.featured || [];
@@ -1437,6 +1439,18 @@
                 allOffset = allLoadedPosts.length;
                 activeCategory = getActiveCategory();
 
+                // --- Combine featured, trending, and allLoadedPosts if CATEGORY (not "all") is active
+                if (activeCategory) {
+                    const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
+                    const map = new Map();
+                    allComb.forEach(post => {
+                        if (post && post.id) map.set(post.id, post);
+                    });
+                    commonCategoryPosts = Array.from(map.values());
+                } else {
+                    commonCategoryPosts = [];
+                }
+
                 if (sectionViewMode === "search" && currentSearch) {
                     const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
                     const map = new Map();
@@ -1447,10 +1461,6 @@
                 }
 
                 renderTagAboveMain();
-                /* if (!isCatLoaded) {
-                     renderCategoryChips();
-                     isCatLoaded = true;
-                 }*/
                 renderCategoryChips();
                 renderHeroCardOrCategoryBanner();
                 renderNowTrendingSidebar();
@@ -1471,7 +1481,6 @@
                 search: currentSearch
             }, function (res) {
                 let data = typeof res === "string" ? JSON.parse(res) : res;
-
                 allCategories = data.categories || [];
                 heroPost = data.hero || null;
                 featuredPosts = data.featured || [];
@@ -1484,8 +1493,19 @@
                 featuredOffset = featuredPosts.length;
                 trendingOffset = trendingPosts.length;
                 allOffset = allLoadedPosts.length;
-
                 activeCategory = getActiveCategory();
+
+                // --- Combine featured, trending, and allLoadedPosts if CATEGORY (not "all") is active
+                if (activeCategory) {
+                    const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
+                    const map = new Map();
+                    allComb.forEach(post => {
+                        if (post && post.id) map.set(post.id, post);
+                    });
+                    commonCategoryPosts = Array.from(map.values());
+                } else {
+                    commonCategoryPosts = [];
+                }
 
                 if (sectionViewMode === "search" && currentSearch) {
                     const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
@@ -1570,52 +1590,7 @@
             });
         }
 
-        /* function renderCategoryChips() {
-             let chips = `<span class="category-chip" data-category-id="all">All Categories</span>`;
-             allCategories.forEach(c =>
-                 chips += `<span class="category-chip" data-category-id="${c.id}">${c.category_name}</span>`
-             );
-             $("#categoryChips").html(chips);
-     
-             $(".category-chip").removeClass("active");
-             $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
-     
-             $(".category-chip").off("click").on("click", function (e) {
-                 // REMOVE/HIDE post detail section when selecting category!
-                 $("#postDetailSection").remove();
-     
-                 let $this = $(this);
-                 let offset = $this.offset();
-                 let x = e.pageX - offset.left;
-                 let y = e.pageY - offset.top;
-     
-                 $this.css('--ripple-x', `${x}px`);
-                 $this.css('--ripple-y', `${y}px`);
-                 $this.addClass('ripple');
-     
-                 setTimeout(() => $this.removeClass('ripple'), 400);
-     
-                 let catid = $this.data("category-id").toString();
-                 currentCategoryId = catid;
-                 $(".category-chip").removeClass("active");
-                 $this.addClass("active");
-     
-                 sectionViewMode = 'all';
-                 featuredOffset = trendingOffset = allOffset = 0;
-                 featuredPosts = [];
-                 trendingPosts = [];
-                 allLoadedPosts = [];
-                 searchResultsPosts = [];
-                 currentSearch = '';
-                 $(".search-bar").val("");
-                 fetchAndRenderAll();
-             });
-         }*/
         function renderCategoryChips() {
-
-            console.log("Rendering category chips with currentCategoryId:", currentCategoryId);
-
-
             const categoryIcons = {
                 "all": "apps",
                 "technology": "swap_vert",
@@ -1630,49 +1605,34 @@
             };
 
             let chips = `<span class="category-chip" id="all" data-category-id="all">
-        <span class="cat-icon material-icons" >${categoryIcons["all"]}</span>
-        All 
-    </span>`;
-
-
-
-
+                <span class="cat-icon material-icons" >${categoryIcons["all"]}</span>
+                All 
+            </span>`;
 
             allCategories.forEach(c => {
                 let key = c.category_name.toString().toLowerCase().replace(/\s+/g, '-');
                 let icon = categoryIcons[key] || "label";
                 chips += `<span class="category-chip" data-category-id="${c.id}">
-            <span class="cat-icon material-icons">${icon}</span>
-            ${c.category_name}
-        </span>`;
+                    <span class="cat-icon material-icons">${icon}</span>
+                    ${c.category_name}
+                </span>`;
             });
             $("#categoryChips").html(chips);
 
-            // Remove ALL active first (prevents multi-active bug)
             $(".category-chip").removeClass("active");
 
-
             if (currentCategoryId === 'all') {
-                console.log("Setting active category to 'all'", currentCategoryId);
                 $(`.category-chip[data-category-id='${currentCategoryId}']`).remove("active");
             }
 
-
-
             $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
 
-            // Button click
             $(".category-chip").off("click").on("click", function (e) {
-
                 $(".category-chip").removeClass("active");
                 $(this).addClass("active");
                 let newId = $(this).data("category-id").toString();
                 currentCategoryId = newId;
-
-                // Optional: scroll into view
                 this.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
-
-                // Your logic here
                 $("#postDetailSection").remove();
                 sectionViewMode = 'all';
                 featuredOffset = trendingOffset = allOffset = 0;
@@ -1683,28 +1643,19 @@
                 currentSearch = '';
                 $(".search-bar").val("");
                 fetchAndRenderAll();
-
             });
-
         }
 
         function getActiveCategoryId() {
-            // return ($(".category-chip.active").data("category-id") || "all").toString();
             return currentCategoryId;
         }
         function getActiveCategory() {
-            /* const catId = getActiveCategoryId();
-             console.log("Active Category ID:", catId);
-             if (catId === 'all') return null;
-             return allCategories.find(c => c.id == catId) || null;*/
             return allCategories.find(c => c.id.toString() === currentCategoryId) ?? null;
         }
 
         // SEARCH
         $(".search-bar").on("input", function () {
-            // REMOVE/HIDE post detail when searching!
             $("#postDetailSection").remove();
-
             let val = ($(this).val() || "").trim();
             if (!val) {
                 currentSearch = '';
@@ -1734,16 +1685,8 @@
             $("#top-section").show();
             if (activeCategory) {
                 let image = activeCategory.category_image ? activeCategory.category_image : "category/default-category.jpg";
-                let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08);">
-   <img src="category/${image}" style="width:100%; height:100%; margin:auto;">
-    <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
-        ${activeCategory.category_name}
-    </div>
-</div>`;
-
                 $("#exclusiveLaunchContainer").hide();
                 $(".now-trending-card").hide();
-                $("#categoryImage").show().html(html);
             } else {
                 renderHeroCard();
                 $("#exclusiveLaunchContainer").show();
@@ -1753,7 +1696,6 @@
         }
         function renderHeroCard() {
             if (!heroPost) return;
-
             let exHtml;
             if (heroPost) {
                 exHtml = `
@@ -1764,21 +1706,18 @@
                 <a href="javascript:void(0)" class="stretched-link"></a>
                 <style>
                   #exclusiveLaunchContainer {
-    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 600px;
-    margin: 0;
-    padding: 0;
-    display: flex;              /* Optional: center content inside */
-    align-items: center;
-    justify-content: center;
-}
-
-
-                    
+                    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
+                    background-size: cover;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    width: 100%;
+                    height: 600px;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
                 </style>
             `;
             } else {
@@ -1787,14 +1726,9 @@
                 No Latest Post
             </span>`;
             }
-
-            //showProductDetail(heroPost.id);
             $("#exclusiveLaunchContainer").on("click", function () {
-                console.log("Clicked hero card");
                 showProductDetail(heroPost.id);
             });
-
-
             $("#exclusiveLaunchContainer").html(exHtml);
         }
         function renderNowTrendingSidebar() {
@@ -1831,6 +1765,7 @@
             });
         }
 
+        // THIS IS THE MAIN CHANGE: If activeCategory, show only combined posts in allPostsSection
         function renderSections() {
             if (sectionViewMode === "trending") {
                 $("#featuredSection").hide();
@@ -1847,12 +1782,43 @@
                 $("#searchResultsSection").remove();
                 $("<div id='searchResultsSection'></div>").appendTo("#main-content");
                 renderSearchResultsSection();
+            } else if (activeCategory) {
+                $("#featuredSection").hide();
+                $("#trendingSection").hide();
+                $("#searchResultsSection").remove();
+                renderCommonCategorySection(); // <--- custom function to render combined unique products
             } else {
                 $("#searchResultsSection").remove();
+
                 renderFeaturedSection();
                 renderTrendingSection();
                 renderAllPostsSection();
             }
+        }
+
+        // --- SHOW COMBINED CATEGORY PRODUCTS IN COMMON SECTION (NO DUPLICATES)
+        function renderCommonCategorySection() {
+
+            $("#main-content").hide();
+            if (!commonCategoryPosts.length) {
+                const noProductMessage = `
+                  <div class="text-center py-5">
+                    <h3 class="text-muted">No products found</h3>
+                    <p class="text-secondary">Please try a different category or search term.</p>
+                  </div>
+                `;
+                $("#allPostsSection").html(noProductMessage).show();
+                return;
+            }
+            let title = (activeCategory ? (activeCategory.category_name + " Products") : (sectionViewMode === "search" ? "Search Results" : "All"));
+            let html = `<h3 class="section-title" style="margin-top: -30%;">${title}</h3><div class="row g-4">`;
+            commonCategoryPosts.forEach((post, i) => html += renderPostCard(post, i));
+            html += `</div>`;
+            $("#allPostsSection").html(html).show();
+            $(".product-card").on("click", function () {
+                let pid = $(this).data('postid');
+                showProductDetail(pid);
+            });
         }
 
         function renderFeaturedSection() {
@@ -1898,11 +1864,11 @@
         function renderAllPostsSection() {
             if (!allLoadedPosts.length) {
                 const noProductMessage = `
-      <div class="text-center py-5">
-        <h3 class="text-muted">No products found</h3>
-        <p class="text-secondary">Please try a different category or search term.</p>
-      </div>
-    `;
+                  <div class="text-center py-5">
+                    <h3 class="text-muted">No products found</h3>
+                    <p class="text-secondary">Please try a different category or search term.</p>
+                  </div>
+                `;
                 $("#allPostsSection").html(noProductMessage).show();
                 return;
             }
@@ -1910,9 +1876,9 @@
             let html = `<h3 class="section-title">${title}</h3><div class="row g-4">`;
             allLoadedPosts.forEach((post, i) => html += renderPostCard(post, i));
             html += `</div>
-            <div class="d-flex justify-content-center my-2">
-                <button id="allLoadMoreBtn" class="btn btn-outline-primary" ${allOffset >= totalAllPosts ? "style='display:none'" : ""}>Load More</button>
-            </div>`;
+                <div class="d-flex justify-content-center my-2">
+                    <button id="allLoadMoreBtn" class="btn btn-outline-primary" ${allOffset >= totalAllPosts ? "style='display:none'" : ""}>Load More</button>
+                </div>`;
             $("#allPostsSection").html(html).show();
             $("#allLoadMoreBtn").off("click").on("click", function () {
                 reloadSection('all');
@@ -1938,32 +1904,27 @@
         }
         function renderPostCard(post, i) {
             return `
-    <div class="col-12 col-sm-6 col-md-3 product-row">
-        <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
-          
-          <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
-            <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
-                 alt="${(post.title || '').replace(/"/g, '&quot;')}" 
-               
-                 class="w-100 h-100 object-fit-contain rounded-top" />
-          </div>
-
-          <div class="p-3">
-          
-            <div class="product-meta-row">
-              <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
-            </div>
-            <h6 class="card-title text-truncate-2">${post.title}</h6>
-            ${post.tags ? `<div class="mb-1">
-              ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
-            </div>` : ""}
-            <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
-          </div>
-        </div>
-    </div>
-    `;
+                <div class="col-12 col-sm-6 col-md-3 product-row">
+                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                      <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+                        <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}"
+                             alt="${(post.title || '').replace(/"/g, '&quot;')}"
+                             class="w-100 h-100 object-fit-contain rounded-top" />
+                      </div>
+                      <div class="p-3">
+                        <div class="product-meta-row">
+                          <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
+                        </div>
+                        <h6 class="card-title text-truncate-2">${post.title}</h6>
+                        ${post.tags ? `<div class="mb-1">
+                          ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+                        </div>` : ""}
+                        <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                      </div>
+                    </div>
+                </div>
+            `;
         }
-
 
         function showProductDetail(postId) {
             $("#main-content").html('<div style="padding:4em;text-align:center;">Loading...</div>');
@@ -1972,6 +1933,7 @@
             $("#allPostsSection").hide();
             $("#top-section").hide();
             $("#productsGridSection").show();
+
             $.post('ajax/post_api.php', { action: 'post', id: postId }, function (resp) {
                 if (resp && resp.post) {
                     let detailHtml = `<div id="postDetailSection" >`;
@@ -1991,59 +1953,49 @@
             }, 'json');
         }
 
-
         function renderPostDetailHtml(d) {
             let pd = d.post;
-
-            // Main image
-            // let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images?.[0] || pd.thumbnail}" alt="Main" />`;
-
             let gallery = `
-<div style="display: flex; justify-content: center;">
-  <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
-    <img id="mainImgView" 
-         class="main-img-view mb-3 w-100 h-100 rounded" 
-         src="${d.images?.[0] || pd.thumbnail}" 
-         alt="Main" />
-  </div>
-</div>
-`;
-
-
+                <div style="display: flex; justify-content: center;">
+                  <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
+                    <img id="mainImgView"
+                         class="main-img-view mb-3 w-100 h-100 rounded"
+                         src="${d.images?.[0] || pd.thumbnail}"
+                         alt="Main" />
+                  </div>
+                </div>
+            `;
 
             if (d.images && d.images.length > 1) {
                 gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2" style="margin-left:12px;">`;
                 d.images.forEach((img, i) => {
-                    gallery += `<img src="${img}" 
-                          class="thumb-img rounded${i === 0 ? ' active' : ''}" 
-                          data-img="${img}" 
-                          alt="image ${i}" 
+                    gallery += `<img src="${img}"
+                          class="thumb-img rounded${i === 0 ? ' active' : ''}"
+                          data-img="${img}"
+                          alt="image ${i}"
                           style="height: 70px; width: auto; object-fit: contain;" />`;
                 });
                 gallery += `</div>`;
             }
 
             categoryName = pd.category_name || "All Gadgets";
-            // Badges
             let badges = '';
             if (pd.category_name) badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
             if (pd.is_featured == 1) badges += `<span class="badge bg-warning-subtle text-warning-emphasis me-2">Featured</span>`;
             if (pd.is_trending == 1) badges += `<span class="badge bg-danger-subtle text-danger me-2">Trending</span>`;
             if (pd.status == 'draft') badges += `<span class="badge bg-secondary">Draft</span>`;
 
-            // Product links
             let links = '';
             (d.product_links || []).forEach(link => {
                 links += `<a class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2"
-                href="${link.product_link}" target="_blank" rel="nofollow noopener">
-                <i class="bi bi-cart-check me-2"></i>
-                ${link.price !== null && link.price !== ""
+                    href="${link.product_link}" target="_blank" rel="nofollow noopener">
+                    <i class="bi bi-cart-check me-2"></i>
+                    ${link.price !== null && link.price !== ""
                         ? 'Get it for <span class="fw-bold ms-1 me-2">$' + parseFloat(link.price).toFixed(2) + '</span>'
                         : 'Get this Product'}
-        </a>`;
+                </a>`;
             });
 
-            // Price
             let prices = '';
             if (pd.price || pd.old_price) {
                 prices += pd.old_price ? `<span class="old-price me-2 text-decoration-line-through">$${parseFloat(pd.old_price).toFixed(2)}</span>` : '';
@@ -2051,29 +2003,27 @@
                 if (pd.discount) prices += `<span class="discount-badge ms-2">${pd.discount} OFF</span>`;
             }
 
-            // Meta
             let meta = `<span><i class="bi bi-clock"></i> ${pd.created_at.substr(0, 10)}</span>`;
             if (pd.updated_at && pd.updated_at != pd.created_at) {
                 meta += `<span class="ms-2">Updated ${pd.updated_at.substr(0, 10)}</span>`;
             }
 
-            // Final HTML
             let html = `
-    <div class="w-100" style="padding:1rem;"> <!-- full-width wrapper -->
-      <div class="detail-card row gx-5 gy-4 w-100">
-        <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
-        <div class="col-12 col-md-6">
-          <div class="card-title mb-3">${pd.title}</div>
-          <div class="d-flex mb-2 align-items-center">${badges}</div>
-          <div class="mb-3 meta-wrap text-muted small">${meta}</div>
-          ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
-          ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
-          ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
-          ${links}
-        </div>
-      </div>
-    </div>
-  `;
+                <div class="w-100" style="padding:1rem;">
+                  <div class="detail-card row gx-5 gy-4 w-100">
+                    <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
+                    <div class="col-12 col-md-6">
+                      <div class="card-title mb-3">${pd.title}</div>
+                      <div class="d-flex mb-2 align-items-center">${badges}</div>
+                      <div class="mb-3 meta-wrap text-muted small">${meta}</div>
+                      ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
+                      ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
+                      ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
+                      ${links}
+                    </div>
+                  </div>
+                </div>
+            `;
 
             setTimeout(() => {
                 $('.thumb-img').on('click', function () {
@@ -2099,39 +2049,33 @@
             }, 'json');
         }
         function renderRelatedProductsSection(posts) {
-
-            console.log('Rendering related products:', posts);
-
             let html = `<h3 class="section-title">Related Products</h3>
-        <div class="row g-4">`;
+                <div class="row g-4">`;
             if (!posts.length) {
                 html += `<div class="col-12"><div class="alert alert-info">No related product found</div></div>`;
             } else {
                 posts.forEach((post, i) => {
                     html += `
-                <div class="col-12 col-sm-6 col-md-3 product-row">
-                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
-                   
-                  <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
-            <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
-                 alt="${(post.title || '').replace(/"/g, '&quot;')}" 
-               
-                 class="w-100 h-100 object-fit-contain rounded-top" />
-          </div>
-
-
-                        <div class="p-3">
-                          <div class="product-meta-row">
-              <span class="meta" style="background:#e8f1fd;color:#5786f2">${categoryName || ''}</span>
-            </div>
- <h6 class="card-title text-truncate-2">${post.title}</h6>
-                             ${post.tags ? `<div class="mb-1">
-              ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
-            </div>` : ""}
-                            <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                        <div class="col-12 col-sm-6 col-md-3 product-row">
+                            <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                              <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+                                <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}"
+                                     alt="${(post.title || '').replace(/"/g, '&quot;')}"
+                                     class="w-100 h-100 object-fit-contain rounded-top" />
+                              </div>
+                              <div class="p-3">
+                                <div class="product-meta-row">
+                                  <span class="meta" style="background:#e8f1fd;color:#5786f2">${categoryName || ''}</span>
+                                </div>
+                                <h6 class="card-title text-truncate-2">${post.title}</h6>
+                                 ${post.tags ? `<div class="mb-1">
+                                  ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+                                </div>` : ""}
+                                <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                              </div>
+                            </div>
                         </div>
-                    </div>
-                </div>`;
+                    `;
                 });
             }
             html += `</div>`;
