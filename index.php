@@ -2017,7 +2017,7 @@
             }
 
             let html = `
-                <div class="w-100" style="padding:1rem;">
+                <div class="w-100" style="padding:1rem; margin-top: -55px;">
                   <div class="detail-card row gx-5 gy-4 w-100">
                     <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
                     <div class="col-12 col-md-6">
