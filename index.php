@@ -990,11 +990,15 @@
         .section-title {
             font-weight: 700;
             font-size: 1.4rem;
-            margin: 32px 0 24px;
+            margin: 8px 0 24px;
             letter-spacing: -0.3px;
             position: relative;
             display: inline-block;
         }
+
+
+
+
 
         .section-title::after {
             content: "";
@@ -1284,7 +1288,7 @@
             <!-- Left Column -->
             <div class="col-12 col-md-4 mb-4 text-center text-md-start">
                 <a class="navbar-brand d-flex align-items-center justify-content-center justify-content-md-start"
-                    href="/">
+                    href="/" style="margin-left: 20px;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height: 68px;" />
                 </a>
                 <p style="
@@ -1292,6 +1296,7 @@
                     font-size: 0.95rem;
                     line-height: 1.6;
                     margin-top: 16px;
+                    margin-left: 20px;
                 ">
                     Discovering and curating the most innovative gadgets and tech
                     products from around the world.
@@ -1799,7 +1804,9 @@
         // --- SHOW COMBINED CATEGORY PRODUCTS IN COMMON SECTION (NO DUPLICATES)
         function renderCommonCategorySection() {
 
-            $("#main-content").hide();
+
+
+
             if (!commonCategoryPosts.length) {
                 const noProductMessage = `
                   <div class="text-center py-5">
@@ -1810,8 +1817,9 @@
                 $("#allPostsSection").html(noProductMessage).show();
                 return;
             }
+
             let title = (activeCategory ? (activeCategory.category_name + " Products") : (sectionViewMode === "search" ? "Search Results" : "All"));
-            let html = `<h3 class="section-title" style="margin-top: -30%;">${title}</h3><div class="row g-4">`;
+            let html = `<h3 class="section-title1" style="margin-top: -50px; margin-bottom: 25px; font-weight: 700; font-size: 1.4rem; letter-spacing: -0.3px;">${title}</h3><div class="row g-4">`;
             commonCategoryPosts.forEach((post, i) => html += renderPostCard(post, i));
             html += `</div>`;
             $("#allPostsSection").html(html).show();
