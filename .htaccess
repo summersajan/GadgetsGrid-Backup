@@ -1,0 +1,14 @@
+RewriteEngine On
+RewriteBase /GadgetsGrid/
+
+# Redirect old style ?id=xx to new pretty URL
+RewriteCond %{THE_REQUEST} \s/product\.php\?id=([0-9]+) [NC]
+RewriteRule ^product\.php$ product/%1 [R=301,L]
+
+# Rewrite pretty URL to PHP internally
+RewriteRule ^product/([0-9]+)/?$ product.php?id=$1 [L,QSA]
+# Pretty URLs for static pages
+RewriteRule ^terms/?$ terms.php [L]
+RewriteRule ^privacy/?$ privacy.php [L]
+RewriteRule ^about/?$ about.php [L]
+RewriteRule ^contact/?$ contact.php [L]

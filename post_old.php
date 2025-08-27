@@ -41,20 +41,7 @@
         activeCategory = null,
         sectionViewMode = "all";
 
-    function detectPostId() {
-        // First check query param (for old links)
-        let id = getUrlParam('id');
-        if (id) return id;
-
-        // Then check if URL looks like /post/22
-        let match = window.location.pathname.match(/\/post\/(\d+)/);
-        if (match) return match[1];
-
-        return null;
-    }
-
-    var currentPostId = detectPostId();
-
+    var currentPostId = getUrlParam('id');
 
     // Helper functions
     function getUrlParam(name) {
@@ -99,7 +86,7 @@
 
     // Load categories for navigation
     function loadCategories() {
-        $.post('../ajax/load_index_data.php', {
+        $.post('ajax/load_index_data.php', {
             featuredOffset: 0,
             trendingOffset: 0,
             allOffset: 0,
@@ -118,7 +105,7 @@
 
     // Main fetch function for grid view
     function fetchAndRenderAll() {
-        $.post('../ajax/load_index_data.php', {
+        $.post('ajax/load_index_data.php', {
             featuredOffset: 0,
             trendingOffset: 0,
             allOffset: 0,
@@ -225,7 +212,7 @@
             currentSearch = "";
             sectionViewMode = "all";
             //fetchAndRenderAll();
-            window.location.href = '../';
+            window.location.href = 'index.php';
         });
     }
 
@@ -278,7 +265,7 @@
         $(".product-card").on("click", function () {
             let pid = $(this).data('postid');
             currentPostId = pid;
-            window.history.pushState({}, '', `${pid}`);
+            window.history.pushState({}, '', `?id=${pid}`);
             loadMainPost();
         });
     }
@@ -295,7 +282,7 @@
         $(".product-card").on("click", function () {
             let pid = $(this).data('postid');
             currentPostId = pid;
-            window.history.pushState({}, '', `${pid}`);
+            window.history.pushState({}, '', `?id=${pid}`);
             loadMainPost();
         });
     }
@@ -312,7 +299,7 @@
         $(".product-card").on("click", function () {
             let pid = $(this).data('postid');
             currentPostId = pid;
-            window.history.pushState({}, '', `${pid}`);
+            window.history.pushState({}, '', `?id=${pid}`);
             loadMainPost();
         });
     }
@@ -322,7 +309,7 @@
             <div class="col-12 col-sm-6 col-md-3 product-row">
                 <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
                   <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
-                    <img src="../${post.thumbnail ? post.thumbnail : "images/default.jpg"}" alt="${(post.title || '').replace(/"/g, '&quot;')}" class="w-100 h-100 object-fit-contain rounded-top" />
+                    <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" alt="${(post.title || '').replace(/"/g, '&quot;')}" class="w-100 h-100 object-fit-contain rounded-top" />
                   </div>
                   <div class="p-3">
                     <div class="product-meta-row">
@@ -346,7 +333,7 @@
         let gallery = `
             <div style="display: flex; justify-content: center;">
               <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
-                <img id="mainImgView" class="main-img-view mb-3 w-100 h-100 rounded" src="../${d.images?.[0] || d.post.thumbnail}" alt="Main" />
+                <img id="mainImgView" class="main-img-view mb-3 w-100 h-100 rounded" src="${d.images?.[0] || d.post.thumbnail}" alt="Main" />
               </div>
             </div>
         `;
@@ -354,7 +341,7 @@
         if (d.images && d.images.length > 1) {
             gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2" style="margin-left:12px;">`;
             d.images.forEach((img, i) => {
-                gallery += `<img src="../${img}" class="thumb-img rounded${i === 0 ? ' active' : ''}" data-img="../${img}" alt="image ${i}" style="height: 70px; width: auto; object-fit: contain;" />`;
+                gallery += `<img src="${img}" class="thumb-img rounded${i === 0 ? ' active' : ''}" data-img="${img}" alt="image ${i}" style="height: 70px; width: auto; object-fit: contain;" />`;
             });
             gallery += `</div>`;
         }
@@ -423,7 +410,7 @@
         $("#postDetail").show();
         $("#backButton").show();
 
-        $.post('../ajax/post_api.php', { action: 'post', id: currentPostId }, function (resp) {
+        $.post('ajax/post_api.php', { action: 'post', id: currentPostId }, function (resp) {
             if (resp && resp.post) {
                 renderPostDetail(resp);
                 // LOAD RELATED PRODUCTS - This is the key line that was missing proper execution
@@ -438,7 +425,7 @@
 
     // 4. RELATED POSTS LAYOUT - COMPLETE IMPLEMENTATION
     function loadRelatedProducts(categoryId, excludeId) {
-        $.post('../ajax/post_api.php', {
+        $.post('ajax/post_api.php', {
             action: 'posts',
             categoryId: categoryId || 'all',
             limit: 8
@@ -464,7 +451,7 @@
                     <div class="col-12 col-sm-6 col-md-3 product-row">
                         <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
                           <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
-                            <img src="../${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
+                            <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" 
                                  alt="${(post.title || '').replace(/"/g, '&quot;')}" 
                                  class="w-100 h-100 object-fit-contain rounded-top" />
                           </div>
@@ -494,7 +481,7 @@
         $("#relatedProductsContainer .product-card").on("click", function () {
             let pid = $(this).data("postid");
             currentPostId = pid;
-            window.history.pushState({}, '', `${pid}`);
+            window.history.pushState({}, '', `?id=${pid}`);
             loadMainPost();
         });
     }

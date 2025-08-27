@@ -371,8 +371,8 @@
             }
 
             .navbar-brand img {
-                height: 64px;
-                width: 64px;
+                height: 158px;
+                width: 158px;
                 margin-bottom: 12px;
             }
 
@@ -990,11 +990,15 @@
         .section-title {
             font-weight: 700;
             font-size: 1.4rem;
-            margin: 32px 0 24px;
+            margin: 8px 0 24px;
             letter-spacing: -0.3px;
             position: relative;
             display: inline-block;
         }
+
+
+
+
 
         .section-title::after {
             content: "";
@@ -1042,6 +1046,9 @@
             flex-wrap: wrap;
         }
 
+
+
+
         .product-meta-row .meta {
             background: #f1f5f9;
             border-radius: 6px;
@@ -1049,6 +1056,7 @@
             color: var(--main-dark);
             font-weight: 600;
             font-size: 0.8rem;
+            margin-top: -14px;
         }
 
         .product-card .card-title {
@@ -1113,6 +1121,34 @@
                 display: none !important;
             }
         }
+
+        .text-truncate-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        @media (max-width: 767px) {
+            .footer-links {
+                align-items: center;
+                justify-content: center;
+            }
+
+            .footer-social {
+                justify-content: center !important;
+            }
+
+            .footer-social a {
+                font-size: 1.4rem;
+            }
+
+            footer {
+                padding: 32px 16px;
+                text-align: center;
+            }
+        }
     </style>
     <!-- Favicon icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -1144,13 +1180,12 @@
         <div class="d-flex flex-column">
             <div class="d-flex align-items-center py-3 px-2" style="background : #fafafb">
                 <!-- Logo: text, not image -->
-                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="index.php"
-                    style="margin-left: 20px;">
+                <a class="navbar-brand d-flex align-items-center" id="logo-div" href="/" style="margin-left: 20px;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
                 </a>
                 <!-- Search Bar -->
 
-                <a class="align-items-center" id="logo-div1" href="index.php" style="display:none;">
+                <a class="align-items-center" id="logo-div1" href="/" style="display:none;">
                     <img src="images/logo.svg" alt="Gadget Grid logo" />
 
                 </a>
@@ -1241,67 +1276,102 @@
 </div>
 
 <!-- Footer -->
-<footer>
+<footer style="
+    margin-top: 80px;
+    background: #fff;
+    border-top: 1px solid #f1f5f9;
+    color: var(--dark);
+    padding: 48px 0 24px;
+">
     <div class="container-lg">
         <div class="row">
-            <div class="col-md-4 mb-4">
-                <a class="navbar-brand d-flex align-items-center" href="index.php">
-                    <img src="images/logo.svg" alt="Gadget Grid logo" style="height:68px;" />
-
+            <!-- Left Column -->
+            <div class="col-12 col-md-4 mb-4 text-center text-md-start">
+                <a class="navbar-brand d-flex align-items-center justify-content-center justify-content-md-start"
+                    href="/" style="margin-left: 20px;">
+                    <img src="images/logo.svg" alt="Gadget Grid logo" style="height: 68px;" />
                 </a>
                 <p style="
-                color: var(--text-muted);
-                font-size: 0.95rem;
-                line-height: 1.6;
-              ">
+                    color: var(--text-muted);
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                    margin-top: 16px;
+                    margin-left: 20px;
+                ">
                     Discovering and curating the most innovative gadgets and tech
                     products from around the world.
                 </p>
             </div>
-            <div class="col-md-4 mb-4">
-                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark)">
+
+            <!-- Center Column -->
+            <div class="col-12 col-md-4 mb-4 text-center">
+                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark);">
                     Quick Links
                 </h6>
-                <div class="footer-links">
-                    <!-- <a href="#">About Us</a>
-                        <a href="support@gadgetsgrid.com">Contact</a>
-                        <a href="#">Advertise</a>
-                        <a href="#">FAQ</a> -->
-                    <a href="privacy.php">Privacy Policy</a>
-                    <a href="terms.php">Terms</a>
-
+                <div class="footer-links" style="
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    text-align: center;
+                ">
+                    <a href="privacy.php"
+                        style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Privacy
+                        Policy</a>
+                    <a href="terms.php"
+                        style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Terms</a>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark)">
+
+            <!-- Right Column -->
+            <div class="col-12 col-md-4 mb-4 text-center text-md-end">
+                <h6 style="font-weight: 600; margin-bottom: 16px; color: var(--dark);">
                     Connect
                 </h6>
-                <div class="footer-social">
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-pinterest"></i></a>
-                    <a href="#"><i class="bi bi-youtube"></i></a>
+                <div class="footer-social" style="
+                    display: flex;
+                    justify-content: center;
+                    justify-content: flex-end;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                ">
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-twitter"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-facebook"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-pinterest"></i></a>
+                    <a href="#"
+                        style="color: var(--text-muted); font-size: 1.2rem; transition: color 0.2s, transform 0.2s;"><i
+                            class="bi bi-youtube"></i></a>
                 </div>
             </div>
         </div>
 
-        <div class="footer-divider"></div>
+        <div class="footer-divider" style="border-top: 1px solid #f1f5f9; margin: 24px 0;"></div>
 
-        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <div class="footer-copyright mb-3 mb-md-0">
+        <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+            <div class="footer-copyright mb-3 mb-md-0" style="color: #94a3b8; font-size: 0.9rem;">
                 &copy; 2025 Gadget Grid. All rights reserved.
             </div>
-            <div style="color: #94a3b8; font-size: 0.9rem">
-                Made with <span class="footer-heart">♥</span> by Gadget Grid Team
+            <div style="color: #94a3b8; font-size: 0.9rem;">
+                Made with <span class="footer-heart"
+                    style="color: #f43f5e; font-size: 1.1rem; vertical-align: middle; margin: 0 4px;">♥</span> by Gadget
+                Grid Team
             </div>
         </div>
     </div>
 </footer>
 
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 
 <script>
@@ -1323,6 +1393,11 @@
     let searchResultsPosts = [];
     let currentCategoryId = "all";
     let currentGridPosts = []; // For grid/back detail logic
+
+    let categoryName = "All Gadgets"; // Default category name
+
+    // ---- COMMON CATEGORY COMBO ----
+    let commonCategoryPosts = [];
 
     // _UTIL:_
     function escapeHtml(s) {
@@ -1355,7 +1430,6 @@
                 search: currentSearch
             }, function (res) {
                 let data = typeof res === "string" ? JSON.parse(res) : res;
-
                 allCategories = data.categories || [];
                 heroPost = data.hero || null;
                 featuredPosts = data.featured || [];
@@ -1370,6 +1444,18 @@
                 allOffset = allLoadedPosts.length;
                 activeCategory = getActiveCategory();
 
+                // --- Combine featured, trending, and allLoadedPosts if CATEGORY (not "all") is active
+                if (activeCategory) {
+                    const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
+                    const map = new Map();
+                    allComb.forEach(post => {
+                        if (post && post.id) map.set(post.id, post);
+                    });
+                    commonCategoryPosts = Array.from(map.values());
+                } else {
+                    commonCategoryPosts = [];
+                }
+
                 if (sectionViewMode === "search" && currentSearch) {
                     const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
                     const map = new Map();
@@ -1380,10 +1466,6 @@
                 }
 
                 renderTagAboveMain();
-                /* if (!isCatLoaded) {
-                     renderCategoryChips();
-                     isCatLoaded = true;
-                 }*/
                 renderCategoryChips();
                 renderHeroCardOrCategoryBanner();
                 renderNowTrendingSidebar();
@@ -1404,7 +1486,6 @@
                 search: currentSearch
             }, function (res) {
                 let data = typeof res === "string" ? JSON.parse(res) : res;
-
                 allCategories = data.categories || [];
                 heroPost = data.hero || null;
                 featuredPosts = data.featured || [];
@@ -1417,8 +1498,19 @@
                 featuredOffset = featuredPosts.length;
                 trendingOffset = trendingPosts.length;
                 allOffset = allLoadedPosts.length;
-
                 activeCategory = getActiveCategory();
+
+                // --- Combine featured, trending, and allLoadedPosts if CATEGORY (not "all") is active
+                if (activeCategory) {
+                    const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
+                    const map = new Map();
+                    allComb.forEach(post => {
+                        if (post && post.id) map.set(post.id, post);
+                    });
+                    commonCategoryPosts = Array.from(map.values());
+                } else {
+                    commonCategoryPosts = [];
+                }
 
                 if (sectionViewMode === "search" && currentSearch) {
                     const allComb = [...featuredPosts, ...trendingPosts, ...allLoadedPosts];
@@ -1503,52 +1595,7 @@
             });
         }
 
-        /* function renderCategoryChips() {
-             let chips = `<span class="category-chip" data-category-id="all">All Categories</span>`;
-             allCategories.forEach(c =>
-                 chips += `<span class="category-chip" data-category-id="${c.id}">${c.category_name}</span>`
-             );
-             $("#categoryChips").html(chips);
-     
-             $(".category-chip").removeClass("active");
-             $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
-     
-             $(".category-chip").off("click").on("click", function (e) {
-                 // REMOVE/HIDE post detail section when selecting category!
-                 $("#postDetailSection").remove();
-     
-                 let $this = $(this);
-                 let offset = $this.offset();
-                 let x = e.pageX - offset.left;
-                 let y = e.pageY - offset.top;
-     
-                 $this.css('--ripple-x', `${x}px`);
-                 $this.css('--ripple-y', `${y}px`);
-                 $this.addClass('ripple');
-     
-                 setTimeout(() => $this.removeClass('ripple'), 400);
-     
-                 let catid = $this.data("category-id").toString();
-                 currentCategoryId = catid;
-                 $(".category-chip").removeClass("active");
-                 $this.addClass("active");
-     
-                 sectionViewMode = 'all';
-                 featuredOffset = trendingOffset = allOffset = 0;
-                 featuredPosts = [];
-                 trendingPosts = [];
-                 allLoadedPosts = [];
-                 searchResultsPosts = [];
-                 currentSearch = '';
-                 $(".search-bar").val("");
-                 fetchAndRenderAll();
-             });
-         }*/
         function renderCategoryChips() {
-
-            console.log("Rendering category chips with currentCategoryId:", currentCategoryId);
-
-
             const categoryIcons = {
                 "all": "apps",
                 "technology": "swap_vert",
@@ -1563,49 +1610,34 @@
             };
 
             let chips = `<span class="category-chip" id="all" data-category-id="all">
-        <span class="cat-icon material-icons" >${categoryIcons["all"]}</span>
-        All 
-    </span>`;
-
-
-
-
+                <span class="cat-icon material-icons" >${categoryIcons["all"]}</span>
+                All 
+            </span>`;
 
             allCategories.forEach(c => {
                 let key = c.category_name.toString().toLowerCase().replace(/\s+/g, '-');
                 let icon = categoryIcons[key] || "label";
                 chips += `<span class="category-chip" data-category-id="${c.id}">
-            <span class="cat-icon material-icons">${icon}</span>
-            ${c.category_name}
-        </span>`;
+                    <span class="cat-icon material-icons">${icon}</span>
+                    ${c.category_name}
+                </span>`;
             });
             $("#categoryChips").html(chips);
 
-            // Remove ALL active first (prevents multi-active bug)
             $(".category-chip").removeClass("active");
 
-
             if (currentCategoryId === 'all') {
-                console.log("Setting active category to 'all'", currentCategoryId);
                 $(`.category-chip[data-category-id='${currentCategoryId}']`).remove("active");
             }
 
-
-
             $(`.category-chip[data-category-id='${currentCategoryId}']`).addClass("active");
 
-            // Button click
             $(".category-chip").off("click").on("click", function (e) {
-
                 $(".category-chip").removeClass("active");
                 $(this).addClass("active");
                 let newId = $(this).data("category-id").toString();
                 currentCategoryId = newId;
-
-                // Optional: scroll into view
                 this.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
-
-                // Your logic here
                 $("#postDetailSection").remove();
                 sectionViewMode = 'all';
                 featuredOffset = trendingOffset = allOffset = 0;
@@ -1616,28 +1648,19 @@
                 currentSearch = '';
                 $(".search-bar").val("");
                 fetchAndRenderAll();
-
             });
-
         }
 
         function getActiveCategoryId() {
-            // return ($(".category-chip.active").data("category-id") || "all").toString();
             return currentCategoryId;
         }
         function getActiveCategory() {
-            /* const catId = getActiveCategoryId();
-             console.log("Active Category ID:", catId);
-             if (catId === 'all') return null;
-             return allCategories.find(c => c.id == catId) || null;*/
             return allCategories.find(c => c.id.toString() === currentCategoryId) ?? null;
         }
 
         // SEARCH
         $(".search-bar").on("input", function () {
-            // REMOVE/HIDE post detail when searching!
             $("#postDetailSection").remove();
-
             let val = ($(this).val() || "").trim();
             if (!val) {
                 currentSearch = '';
@@ -1667,16 +1690,8 @@
             $("#top-section").show();
             if (activeCategory) {
                 let image = activeCategory.category_image ? activeCategory.category_image : "category/default-category.jpg";
-                let html = `<div style="height:400px; position:relative; border-radius:12px; overflow:hidden; box-shadow:0 5px 18px rgba(0,0,0,0.08);">
-   <img src="category/${image}" style="width:100%; height:100%; margin:auto;">
-    <div style="position:absolute; left:0; bottom:0; padding:28px 38px; color:#fff; font-size:2.2rem; background:linear-gradient(to top,rgba(0,0,0,0.60) 65%,rgba(0,0,0,0.05)); border-radius:0 0 12px 12px; font-weight:700;">
-        ${activeCategory.category_name}
-    </div>
-</div>`;
-
                 $("#exclusiveLaunchContainer").hide();
                 $(".now-trending-card").hide();
-                $("#categoryImage").show().html(html);
             } else {
                 renderHeroCard();
                 $("#exclusiveLaunchContainer").show();
@@ -1686,7 +1701,6 @@
         }
         function renderHeroCard() {
             if (!heroPost) return;
-
             let exHtml;
             if (heroPost) {
                 exHtml = `
@@ -1696,11 +1710,19 @@
                 </span>
                 <a href="javascript:void(0)" class="stretched-link"></a>
                 <style>
-                    #exclusiveLaunchContainer {
-                        background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
-                        background-size:cover;
-                        background-position:center;
-                    }
+                  #exclusiveLaunchContainer {
+                    background-image: url('${heroPost.thumbnail ? heroPost.thumbnail : 'images/spa.jpg'}');
+                    background-size: cover;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    width: 100%;
+                    height: 600px;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
                 </style>
             `;
             } else {
@@ -1709,14 +1731,9 @@
                 No Latest Post
             </span>`;
             }
-
-            //showProductDetail(heroPost.id);
             $("#exclusiveLaunchContainer").on("click", function () {
-                console.log("Clicked hero card");
                 showProductDetail(heroPost.id);
             });
-
-
             $("#exclusiveLaunchContainer").html(exHtml);
         }
         function renderNowTrendingSidebar() {
@@ -1753,6 +1770,7 @@
             });
         }
 
+        // THIS IS THE MAIN CHANGE: If activeCategory, show only combined posts in allPostsSection
         function renderSections() {
             if (sectionViewMode === "trending") {
                 $("#featuredSection").hide();
@@ -1769,12 +1787,46 @@
                 $("#searchResultsSection").remove();
                 $("<div id='searchResultsSection'></div>").appendTo("#main-content");
                 renderSearchResultsSection();
+            } else if (activeCategory) {
+                $("#featuredSection").hide();
+                $("#trendingSection").hide();
+                $("#searchResultsSection").remove();
+                renderCommonCategorySection(); // <--- custom function to render combined unique products
             } else {
                 $("#searchResultsSection").remove();
+
                 renderFeaturedSection();
                 renderTrendingSection();
                 renderAllPostsSection();
             }
+        }
+
+        // --- SHOW COMBINED CATEGORY PRODUCTS IN COMMON SECTION (NO DUPLICATES)
+        function renderCommonCategorySection() {
+
+
+
+
+            if (!commonCategoryPosts.length) {
+                const noProductMessage = `
+                  <div class="text-center py-5">
+                    <h3 class="text-muted">No products found</h3>
+                    <p class="text-secondary">Please try a different category or search term.</p>
+                  </div>
+                `;
+                $("#allPostsSection").html(noProductMessage).show();
+                return;
+            }
+
+            let title = (activeCategory ? (activeCategory.category_name + " Products") : (sectionViewMode === "search" ? "Search Results" : "All"));
+            let html = `<h3 class="section-title1" style="margin-top: -50px; margin-bottom: 25px; font-weight: 700; font-size: 1.4rem; letter-spacing: -0.3px;">${title}</h3><div class="row g-4">`;
+            commonCategoryPosts.forEach((post, i) => html += renderPostCard(post, i));
+            html += `</div>`;
+            $("#allPostsSection").html(html).show();
+            $(".product-card").on("click", function () {
+                let pid = $(this).data('postid');
+                showProductDetail(pid);
+            });
         }
 
         function renderFeaturedSection() {
@@ -1820,11 +1872,11 @@
         function renderAllPostsSection() {
             if (!allLoadedPosts.length) {
                 const noProductMessage = `
-      <div class="text-center py-5">
-        <h3 class="text-muted">No products found</h3>
-        <p class="text-secondary">Please try a different category or search term.</p>
-      </div>
-    `;
+                  <div class="text-center py-5">
+                    <h3 class="text-muted">No products found</h3>
+                    <p class="text-secondary">Please try a different category or search term.</p>
+                  </div>
+                `;
                 $("#allPostsSection").html(noProductMessage).show();
                 return;
             }
@@ -1832,9 +1884,9 @@
             let html = `<h3 class="section-title">${title}</h3><div class="row g-4">`;
             allLoadedPosts.forEach((post, i) => html += renderPostCard(post, i));
             html += `</div>
-            <div class="d-flex justify-content-center my-2">
-                <button id="allLoadMoreBtn" class="btn btn-outline-primary" ${allOffset >= totalAllPosts ? "style='display:none'" : ""}>Load More</button>
-            </div>`;
+                <div class="d-flex justify-content-center my-2">
+                    <button id="allLoadMoreBtn" class="btn btn-outline-primary" ${allOffset >= totalAllPosts ? "style='display:none'" : ""}>Load More</button>
+                </div>`;
             $("#allPostsSection").html(html).show();
             $("#allLoadMoreBtn").off("click").on("click", function () {
                 reloadSection('all');
@@ -1860,21 +1912,25 @@
         }
         function renderPostCard(post, i) {
             return `
-            <div class="col-12 col-sm-6 col-md-3 product-row">
-                <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
-                  <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}" alt="${(post.title || '').replace(/"/g, '&quot;')}" />
-                  <div class="p-3">
-                    <div class="product-meta-row">
-                      <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
+                <div class="col-12 col-sm-6 col-md-3 product-row">
+                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                      <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+                        <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}"
+                             alt="${(post.title || '').replace(/"/g, '&quot;')}"
+                             class="w-100 h-100 object-fit-contain rounded-top" />
+                      </div>
+                      <div class="p-3">
+                        <div class="product-meta-row">
+                          <span class="meta" style="background:#e8f1fd;color:#5786f2">${post.category_name || ''}</span>
+                        </div>
+                        <h6 class="card-title text-truncate-2">${post.title}</h6>
+                        ${post.tags ? `<div class="mb-1">
+                          ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+                        </div>` : ""}
+                        <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                      </div>
                     </div>
-                    <h6 class="card-title">${post.title}</h6>
-                    ${post.tags ? `<div class="mb-1">
-                      ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
-                    </div>` : ""}
-                    <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
-                  </div>
                 </div>
-            </div>
             `;
         }
 
@@ -1885,6 +1941,7 @@
             $("#allPostsSection").hide();
             $("#top-section").hide();
             $("#productsGridSection").show();
+
             $.post('ajax/post_api.php', { action: 'post', id: postId }, function (resp) {
                 if (resp && resp.post) {
                     let detailHtml = `<div id="postDetailSection" >`;
@@ -1904,100 +1961,48 @@
             }, 'json');
         }
 
-        /*function renderPostDetailHtml(d) {
-          let pd = d.post;
-          let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images && d.images.length ? d.images[0] : pd.thumbnail}" alt="Main" />`;
-     
-     
-     
-          if (d.images && d.images.length > 1) {
-            gallery += `<div class="d-flex gallery-thumbs flex-wrap">`;
-            d.images.forEach((img, i) => {
-              gallery += `<img src="${img}" class="thumb-img${i == 0 ? ' active' : ''}" data-img="${img}" alt="image ${i}">`;
-            });
-            gallery += `</div>`;
-          }
-          let badges = '';
-          if (pd.category_name) badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
-          if (pd.is_featured == 1) badges += `<span class="badge bg-warning-subtle text-warning-emphasis me-2">Featured</span>`;
-          if (pd.is_trending == 1) badges += `<span class="badge bg-danger-subtle text-danger me-2">Trending</span>`;
-          if (pd.status == 'draft') badges += `<span class="badge bg-secondary">Draft</span>`;
-          let links = '';
-          (d.product_links || []).forEach(link => {
-            links += `<a class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2"
-                        href="${link.product_link}" target="_blank" rel="nofollow noopener">
-                        <i class="bi bi-cart-check me-2"></i>
-                        ${link.price !== null && link.price !== "" ? 'Get it for <span class="fw-bold ms-1 me-2">$' + parseFloat(link.price).toFixed(2) + '</span>' : 'Get this Product'}
-                </a>`;
-          });
-     
-          let prices = '';
-          if (pd.price || pd.old_price) {
-            prices += pd.old_price ? `<span class="old-price me-2 text-decoration-line-through">$${parseFloat(pd.old_price).toFixed(2)}</span>` : '';
-            prices += pd.price ? `<span class="fw-bold text-warning-emphasis">$${parseFloat(pd.price).toFixed(2)}</span>` : '';
-            if (pd.discount) prices += `<span class="discount-badge ms-2">${pd.discount} OFF</span>`;
-          }
-          let meta = `<span><i class="bi bi-clock"></i> ${pd.created_at.substr(0, 10)}</span>`;
-          if (pd.updated_at && pd.updated_at != pd.created_at)
-            meta += `<span class="ms-2">Updated ${pd.updated_at.substr(0, 10)}</span>`;
-          let html = `
-            <div class="detail-card row gx-5 gy-4" style="width:100%;">
-                <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
-                <div class="col-12 col-md-6">
-                    <div class="card-title mb-3">${pd.title}</div>
-                    <div class="d-flex mb-2 align-items-center">${badges}</div>
-                    <div class="mb-3 meta-wrap text-muted small">${meta}</div>
-                    ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
-                    ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
-                    ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
-                    ${links}
-                </div>
-            </div>
-            `;
-          setTimeout(() => {
-            $('.thumb-img').on('click', function () {
-              $('.thumb-img').removeClass('active');
-              $(this).addClass('active');
-              $('#mainImgView').attr('src', $(this).attr('data-img'));
-            });
-          }, 1);
-          return html;
-        }*/
         function renderPostDetailHtml(d) {
             let pd = d.post;
-
-            // Main image
-            let gallery = `<img id="mainImgView" class="main-img-view mb-3 w-100" src="${d.images?.[0] || pd.thumbnail}" alt="Main" />`;
-
+            let gallery = `
+                <div style="display: flex; justify-content: center;">
+                  <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
+                    <img id="mainImgView"
+                         class="main-img-view mb-3 w-100 h-100 rounded"
+                         src="${d.images?.[0] || pd.thumbnail}"
+                         alt="Main" />
+                  </div>
+                </div>
+            `;
 
             if (d.images && d.images.length > 1) {
-                gallery += `<div class="d-flex gallery-thumbs flex-wrap">`;
+                gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2" style="margin-left:12px;">`;
                 d.images.forEach((img, i) => {
-                    gallery += `<img src="${img}" class="thumb-img${i === 0 ? ' active' : ''}" data-img="${img}" alt="image ${i}">`;
+                    gallery += `<img src="${img}"
+                          class="thumb-img rounded${i === 0 ? ' active' : ''}"
+                          data-img="${img}"
+                          alt="image ${i}"
+                          style="height: 70px; width: auto; object-fit: contain;" />`;
                 });
                 gallery += `</div>`;
             }
 
-            // Badges
+            categoryName = pd.category_name || "All Gadgets";
             let badges = '';
             if (pd.category_name) badges += `<span class="badge badge-cat px-3 py-2 me-2">${pd.category_name}</span>`;
             if (pd.is_featured == 1) badges += `<span class="badge bg-warning-subtle text-warning-emphasis me-2">Featured</span>`;
             if (pd.is_trending == 1) badges += `<span class="badge bg-danger-subtle text-danger me-2">Trending</span>`;
             if (pd.status == 'draft') badges += `<span class="badge bg-secondary">Draft</span>`;
 
-            // Product links
             let links = '';
             (d.product_links || []).forEach(link => {
                 links += `<a class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2"
-                href="${link.product_link}" target="_blank" rel="nofollow noopener">
-                <i class="bi bi-cart-check me-2"></i>
-                ${link.price !== null && link.price !== ""
-                        ? 'Get it for <span class="fw-bold ms-1 me-2">$' + parseFloat(link.price).toFixed(2) + '</span>'
-                        : 'Get this Product'}
-        </a>`;
+        href="${link.product_link}" target="_blank" rel="nofollow noopener">
+        <i class="bi bi-cart-check me-2"></i>
+        Buy it Now
+    </a>`;
             });
 
-            // Price
+
             let prices = '';
             if (pd.price || pd.old_price) {
                 prices += pd.old_price ? `<span class="old-price me-2 text-decoration-line-through">$${parseFloat(pd.old_price).toFixed(2)}</span>` : '';
@@ -2005,29 +2010,27 @@
                 if (pd.discount) prices += `<span class="discount-badge ms-2">${pd.discount} OFF</span>`;
             }
 
-            // Meta
             let meta = `<span><i class="bi bi-clock"></i> ${pd.created_at.substr(0, 10)}</span>`;
             if (pd.updated_at && pd.updated_at != pd.created_at) {
                 meta += `<span class="ms-2">Updated ${pd.updated_at.substr(0, 10)}</span>`;
             }
 
-            // Final HTML
             let html = `
-    <div class="w-100" style="padding:1rem;"> <!-- full-width wrapper -->
-      <div class="detail-card row gx-5 gy-4 w-100">
-        <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
-        <div class="col-12 col-md-6">
-          <div class="card-title mb-3">${pd.title}</div>
-          <div class="d-flex mb-2 align-items-center">${badges}</div>
-          <div class="mb-3 meta-wrap text-muted small">${meta}</div>
-          ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
-          ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
-          ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
-          ${links}
-        </div>
-      </div>
-    </div>
-  `;
+                <div class="w-100" style="padding:1rem; margin-top: -55px;">
+                  <div class="detail-card row gx-5 gy-4 w-100">
+                    <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
+                    <div class="col-12 col-md-6">
+                      <div class="card-title mb-3">${pd.title}</div>
+                      <div class="d-flex mb-2 align-items-center">${badges}</div>
+                      <div class="mb-3 meta-wrap text-muted small">${meta}</div>
+                      ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
+                      ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
+                      ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
+                      ${links}
+                    </div>
+                  </div>
+                </div>
+            `;
 
             setTimeout(() => {
                 $('.thumb-img').on('click', function () {
@@ -2054,21 +2057,32 @@
         }
         function renderRelatedProductsSection(posts) {
             let html = `<h3 class="section-title">Related Products</h3>
-        <div class="row g-4">`;
+                <div class="row g-4">`;
             if (!posts.length) {
                 html += `<div class="col-12"><div class="alert alert-info">No related product found</div></div>`;
             } else {
                 posts.forEach((post, i) => {
                     html += `
-                <div class="col-12 col-sm-6 col-md-3 product-row">
-                    <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
-                        <img src="${post.thumbnail || "images/default.jpg"}" alt="">
-                        <div class="p-3">
-                            <h6 class="card-title">${post.title}</h6>
-                            <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                        <div class="col-12 col-sm-6 col-md-3 product-row">
+                            <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                              <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+                                <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}"
+                                     alt="${(post.title || '').replace(/"/g, '&quot;')}"
+                                     class="w-100 h-100 object-fit-contain rounded-top" />
+                              </div>
+                              <div class="p-3">
+                                <div class="product-meta-row">
+                                  <span class="meta" style="background:#e8f1fd;color:#5786f2">${categoryName || ''}</span>
+                                </div>
+                                <h6 class="card-title text-truncate-2">${post.title}</h6>
+                                 ${post.tags ? `<div class="mb-1">
+                                  ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+                                </div>` : ""}
+                                <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                              </div>
+                            </div>
                         </div>
-                    </div>
-                </div>`;
+                    `;
                 });
             }
             html += `</div>`;

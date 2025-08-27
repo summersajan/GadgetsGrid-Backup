@@ -47,7 +47,7 @@
         if (id) return id;
 
         // Then check if URL looks like /post/22
-        let match = window.location.pathname.match(/\/post\/(\d+)/);
+        let match = window.location.pathname.match(/\/product\/(\d+)/);
         if (match) return match[1];
 
         return null;
@@ -237,8 +237,11 @@
             searchResultsPosts = [];
             $("#postDetail").hide();
             $("#backButton").hide();
+
             $("#allPostsSection").show();
+
             fetchAndRenderAll();
+            $("#relatedProductsContainer").remove();
         } else {
             currentSearch = val;
             sectionViewMode = "search";
@@ -246,7 +249,9 @@
             $("#postDetail").hide();
             $("#backButton").hide();
             $("#allPostsSection").show();
+
             fetchAndRenderAll();
+            $("#relatedProductsContainer").remove();
         }
     });
 
@@ -428,6 +433,9 @@
                 renderPostDetail(resp);
                 // LOAD RELATED PRODUCTS - This is the key line that was missing proper execution
                 loadRelatedProducts(resp.post.category_id, resp.post.id);
+
+
+
             } else {
                 $('#postDetail').html('<div class="alert alert-warning">Post not found!</div>');
             }

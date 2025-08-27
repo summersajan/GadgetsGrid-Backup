@@ -1189,6 +1189,7 @@
                     <img src="images/logo.svg" alt="Gadget Grid logo" />
 
                 </a>
+
                 <div class="search-container">
                     <i class="bi bi-search search-icon"></i>
                     <input class="search-bar" type="search"
@@ -1259,8 +1260,8 @@
 </section>
 
 
-<div id="searchTagBar" style="margin-bottom: 0.5rem"></div>
 
+<div class="container-xxl mt-3" id="searchTagBar"></div>
 <section class="container-lg my-4" id="trendingSection">
 
 </section>
@@ -1314,11 +1315,18 @@
                     gap: 10px;
                     text-align: center;
                 ">
-                    <a href="privacy.php"
+                    <a href="privacy"
                         style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Privacy
                         Policy</a>
-                    <a href="terms.php"
+                    <a href="terms"
                         style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Terms</a>
+                    <a href="about"
+                        style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">About
+                        Us</a>
+                    <a href="contact"
+                        style="text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 0.95rem;">Contact
+                        Us</a>
+
                 </div>
             </div>
 
@@ -1372,7 +1380,14 @@
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+    document.getElementById("btn-contact").addEventListener("click", function () {
+        // Redirect to contact page
+        window.location.href = "contact";
 
+
+    });
+</script>
 
 <script>
     let allCategories = [],
@@ -1732,7 +1747,9 @@
             </span>`;
             }
             $("#exclusiveLaunchContainer").on("click", function () {
-                showProductDetail(heroPost.id);
+                // showProductDetail(heroPost.id);
+                //  window.location.href = "post.php?id=" + heroPost.id;
+                window.location.href = "product/" + heroPost.id;
             });
             $("#exclusiveLaunchContainer").html(exHtml);
         }
@@ -1756,7 +1773,9 @@
 
             $(".product-link").on("click", function () {
                 let pid = $(this).data('postid');
-                showProductDetail(pid);
+                //   showProductDetail(pid);
+
+                window.location.href = "product/" + pid;
             });
 
             $('.view-all-link').off('click').on('click', function (e) {
@@ -1825,7 +1844,9 @@
             $("#allPostsSection").html(html).show();
             $(".product-card").on("click", function () {
                 let pid = $(this).data('postid');
-                showProductDetail(pid);
+                // showProductDetail(pid);
+                window.location.href = "product/" + pid;
+
             });
         }
 
@@ -1846,7 +1867,9 @@
             });
             $(".product-card").on("click", function () {
                 let pid = $(this).data('postid');
-                showProductDetail(pid);
+                // showProductDetail(pid);
+                window.location.href = "product/" + pid;
+
             });
         }
         function renderTrendingSection() {
@@ -1866,7 +1889,9 @@
             });
             $(".product-card").on("click", function () {
                 let pid = $(this).data('postid');
-                showProductDetail(pid);
+                // showProductDetail(pid);
+                window.location.href = "product/" + pid;
+
             });
         }
         function renderAllPostsSection() {
@@ -1893,7 +1918,9 @@
             });
             $(".product-card").on("click", function () {
                 let pid = $(this).data('postid');
-                showProductDetail(pid);
+                // showProductDetail(pid);
+                window.location.href = "product/" + pid;
+
             });
         }
         function renderSearchResultsSection() {
@@ -1907,7 +1934,9 @@
             $("#searchResultsSection").html(html).show();
             $(".product-card").on("click", function () {
                 let pid = $(this).data('postid');
-                showProductDetail(pid);
+                // showProductDetail(pid);
+                window.location.href = "product/" + pid;
+
             });
         }
         function renderPostCard(post, i) {
@@ -1935,6 +1964,8 @@
         }
 
         function showProductDetail(postId) {
+
+
             $("#main-content").html('<div style="padding:4em;text-align:center;">Loading...</div>');
             $("#featuredSection").hide();
             $("#trendingSection").hide();
@@ -1964,24 +1995,24 @@
         function renderPostDetailHtml(d) {
             let pd = d.post;
             let gallery = `
-                <div style="display: flex; justify-content: center;">
-                  <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
-                    <img id="mainImgView"
-                         class="main-img-view mb-3 w-100 h-100 rounded"
-                         src="${d.images?.[0] || pd.thumbnail}"
-                         alt="Main" />
-                  </div>
-                </div>
-            `;
+                            <div style="display: flex; justify-content: center;">
+                              <div style="aspect-ratio: 1 / 1; width: 95%; overflow: hidden; background: #fff;" class="rounded">
+                                <img id="mainImgView"
+                                     class="main-img-view mb-3 w-100 h-100 rounded"
+                                     src="${d.images?.[0] || pd.thumbnail}"
+                                     alt="Main" />
+                              </div>
+                            </div>
+                        `;
 
             if (d.images && d.images.length > 1) {
                 gallery += `<div class="d-flex gallery-thumbs flex-wrap mt-2 gap-2" style="margin-left:12px;">`;
                 d.images.forEach((img, i) => {
                     gallery += `<img src="${img}"
-                          class="thumb-img rounded${i === 0 ? ' active' : ''}"
-                          data-img="${img}"
-                          alt="image ${i}"
-                          style="height: 70px; width: auto; object-fit: contain;" />`;
+                                      class="thumb-img rounded${i === 0 ? ' active' : ''}"
+                                      data-img="${img}"
+                                      alt="image ${i}"
+                                      style="height: 70px; width: auto; object-fit: contain;" />`;
                 });
                 gallery += `</div>`;
             }
@@ -1998,11 +2029,10 @@
                 links += `<a class="btn btn-warning product-link-btn d-inline-flex align-items-center mb-2"
                     href="${link.product_link}" target="_blank" rel="nofollow noopener">
                     <i class="bi bi-cart-check me-2"></i>
-                    ${link.price !== null && link.price !== ""
-                        ? 'Get it for <span class="fw-bold ms-1 me-2">$' + parseFloat(link.price).toFixed(2) + '</span>'
-                        : 'Get this Product'}
+                    Buy it Now
                 </a>`;
             });
+
 
             let prices = '';
             if (pd.price || pd.old_price) {
@@ -2017,21 +2047,21 @@
             }
 
             let html = `
-                <div class="w-100" style="padding:1rem; margin-top: -55px;">
-                  <div class="detail-card row gx-5 gy-4 w-100">
-                    <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
-                    <div class="col-12 col-md-6">
-                      <div class="card-title mb-3">${pd.title}</div>
-                      <div class="d-flex mb-2 align-items-center">${badges}</div>
-                      <div class="mb-3 meta-wrap text-muted small">${meta}</div>
-                      ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
-                      ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
-                      ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
-                      ${links}
-                    </div>
-                  </div>
-                </div>
-            `;
+                            <div class="w-100" style="padding:1rem; margin-top: -55px;">
+                              <div class="detail-card row gx-5 gy-4 w-100">
+                                <div class="col-12 col-md-6 detail-gallery">${gallery}</div>
+                                <div class="col-12 col-md-6">
+                                  <div class="card-title mb-3">${pd.title}</div>
+                                  <div class="d-flex mb-2 align-items-center">${badges}</div>
+                                  <div class="mb-3 meta-wrap text-muted small">${meta}</div>
+                                  ${pd.subtitle ? `<div class="mb-2" style="font-size:0.98em; color:#555; font-family:'Inter', sans-serif;">${pd.subtitle}</div>` : ''}
+                                  ${pd.body ? `<div class="mb-2" style="font-size:0.90em; font-family:'Inter', sans-serif; color:#333;">${(pd.body).replace(/\n/g, "<br>")}</div>` : ''}
+                                  ${prices ? `<div class="price-wrap mb-2">${prices}</div>` : ''}
+                                  ${links}
+                                </div>
+                              </div>
+                            </div>
+                        `;
 
             setTimeout(() => {
                 $('.thumb-img').on('click', function () {
@@ -2058,32 +2088,32 @@
         }
         function renderRelatedProductsSection(posts) {
             let html = `<h3 class="section-title">Related Products</h3>
-                <div class="row g-4">`;
+                            <div class="row g-4">`;
             if (!posts.length) {
                 html += `<div class="col-12"><div class="alert alert-info">No related product found</div></div>`;
             } else {
                 posts.forEach((post, i) => {
                     html += `
-                        <div class="col-12 col-sm-6 col-md-3 product-row">
-                            <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
-                              <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
-                                <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}"
-                                     alt="${(post.title || '').replace(/"/g, '&quot;')}"
-                                     class="w-100 h-100 object-fit-contain rounded-top" />
-                              </div>
-                              <div class="p-3">
-                                <div class="product-meta-row">
-                                  <span class="meta" style="background:#e8f1fd;color:#5786f2">${categoryName || ''}</span>
-                                </div>
-                                <h6 class="card-title text-truncate-2">${post.title}</h6>
-                                 ${post.tags ? `<div class="mb-1">
-                                  ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
-                                </div>` : ""}
-                                <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
-                              </div>
-                            </div>
-                        </div>
-                    `;
+                                    <div class="col-12 col-sm-6 col-md-3 product-row">
+                                        <div class="product-card animate-fade-in delay-${i}" data-postid="${post.id}" style="cursor:pointer;">
+                                          <div style="aspect-ratio: 1 / 1; overflow: hidden; background: #fff;" class="rounded-top">
+                                            <img src="${post.thumbnail ? post.thumbnail : "images/default.jpg"}"
+                                                 alt="${(post.title || '').replace(/"/g, '&quot;')}"
+                                                 class="w-100 h-100 object-fit-contain rounded-top" />
+                                          </div>
+                                          <div class="p-3">
+                                            <div class="product-meta-row">
+                                              <span class="meta" style="background:#e8f1fd;color:#5786f2">${categoryName || ''}</span>
+                                            </div>
+                                            <h6 class="card-title text-truncate-2">${post.title}</h6>
+                                             ${post.tags ? `<div class="mb-1">
+                                              ${post.tags.split(',').map(tag => `<span class="badge rounded-pill bg-success me-1">${tag.trim()}</span>`).join('')}
+                                            </div>` : ""}
+                                            <div class="product-date"><i class="bi bi-clock"></i> ${timeAgo(post.created_at)}</div>
+                                          </div>
+                                        </div>
+                                    </div>
+                                `;
                 });
             }
             html += `</div>`;
@@ -2101,6 +2131,8 @@
             }
         });
     });
+
+
 </script>
 
 </body>
