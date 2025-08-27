@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /GadgetsGrid/
+RewriteBase /
 
 # Redirect old style ?id=xx to new pretty URL
 RewriteCond %{THE_REQUEST} \s/product\.php\?id=([0-9]+) [NC]
